@@ -16,11 +16,11 @@
 
 body{
     background:#07111f;
-    color:white;
+    color:#fff;
     min-height:100vh;
 }
 
-button,input{
+button,input,select{
     font-family:inherit;
 }
 
@@ -32,9 +32,10 @@ button{
     width:100%;
     max-width:1100px;
     margin:auto;
-    padding:20px;
+    padding:15px;
 }
 
+/* HEADER */
 .header{
     text-align:center;
     padding:25px 10px;
@@ -47,40 +48,89 @@ button{
 
 .header p{
     color:#94a3b8;
+    font-size:14px;
 }
 
 /* NAV */
-
-.nav{
-    display:flex;
+.main-nav{
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:10px;
     margin-bottom:20px;
 }
 
-.nav button{
-    flex:1;
+.nav-btn{
+    border:none;
+    border-radius:15px;
+    padding:15px;
+    background:#12243a;
+    color:#cbd5e1;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.nav-btn.active{
+    background:#0ea5e9;
+    color:white;
+}
+
+/* PAGE */
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
 }
 
 /* CARD */
-
 .card{
     background:#0f1c2e;
     border:1px solid #1e334d;
     border-radius:20px;
     padding:20px;
     margin-bottom:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+/* GENDER */
+.gender-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:20px 0 15px;
+}
+
+.gender-btn{
+    padding:15px;
+    border-radius:15px;
+    border:1px solid #29435e;
+    background:#12243a;
+    color:#cbd5e1;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.gender-btn.active.putra{
+    background:#2563eb;
+    color:white;
+    border-color:#2563eb;
+}
+
+.gender-btn.active.putri{
+    background:#db2777;
+    color:white;
+    border-color:#db2777;
 }
 
 /* SEARCH */
-
 .search-box{
     margin-bottom:15px;
 }
 
 .search-box input{
     width:100%;
-    padding:15px 18px;
+    padding:15px 17px;
     border-radius:14px;
     border:1px solid #29435e;
     background:#081423;
@@ -89,42 +139,44 @@ button{
     font-size:15px;
 }
 
-/* BUTTON */
+.search-box input:focus{
+    border-color:#38bdf8;
+}
 
+/* BUTTON */
 .btn{
     border:none;
     border-radius:12px;
     padding:12px 18px;
     font-weight:bold;
+    color:white;
 }
 
 .btn-primary{
     background:#0ea5e9;
-    color:white;
 }
 
 .btn-success{
     background:#22c55e;
-    color:white;
 }
 
 .btn-danger{
     background:#ef4444;
-    color:white;
 }
 
 .btn-warning{
     background:#f59e0b;
-    color:white;
 }
 
 .btn-secondary{
     background:#334155;
-    color:white;
 }
 
-/* STUDENT */
+.full-btn{
+    width:100%;
+}
 
+/* STUDENTS */
 .student-list{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -134,8 +186,20 @@ button{
 .student{
     background:#12243a;
     border:1px solid #203b57;
+    border-radius:18px;
     padding:18px;
-    border-radius:17px;
+    transition:.2s;
+}
+
+.student:hover{
+    transform:translateY(-2px);
+    border-color:#38bdf8;
+}
+
+.student-header{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
 }
 
 .student-name{
@@ -145,20 +209,39 @@ button{
 
 .student-class{
     color:#94a3b8;
+    font-size:13px;
     margin-top:5px;
 }
 
+.gender-badge{
+    padding:5px 9px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:bold;
+    height:max-content;
+}
+
+.gender-badge.putra{
+    background:#1d4ed8;
+}
+
+.gender-badge.putri{
+    background:#be185d;
+}
+
+/* PROGRESS */
 .progress{
-    margin-top:15px;
     height:9px;
     background:#1e293b;
     border-radius:20px;
     overflow:hidden;
+    margin-top:15px;
 }
 
 .progress-bar{
     height:100%;
     background:#22c55e;
+    border-radius:20px;
     transition:.3s;
 }
 
@@ -168,28 +251,25 @@ button{
     margin-top:7px;
 }
 
+/* STUDENT ACTION */
 .student-actions{
-    display:flex;
+    display:grid;
+    grid-template-columns:1fr 45px 45px;
     gap:7px;
     margin-top:15px;
 }
 
-.student-actions button{
-    flex:1;
+/* DETAIL */
+.detail-title{
+    font-size:25px;
 }
 
-/* PAGE */
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
+.detail-class{
+    color:#94a3b8;
+    margin-top:5px;
 }
 
 /* CATEGORY */
-
 .category-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -197,12 +277,18 @@ button{
 }
 
 .category{
-    border:1px solid #263f59;
     background:#12243a;
+    border:1px solid #263f59;
+    color:white;
     padding:20px;
     border-radius:18px;
     text-align:left;
-    color:white;
+    transition:.2s;
+}
+
+.category:hover{
+    border-color:#38bdf8;
+    transform:translateY(-2px);
 }
 
 .category-icon{
@@ -211,7 +297,8 @@ button{
 }
 
 .category h3{
-    margin-bottom:5px;
+    margin-bottom:6px;
+    font-size:17px;
 }
 
 .category p{
@@ -220,8 +307,7 @@ button{
 }
 
 /* MATERIAL */
-
-.back{
+.back-btn{
     margin-bottom:15px;
 }
 
@@ -238,12 +324,13 @@ button{
     padding:15px;
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:13px;
+    cursor:pointer;
 }
 
 .material-item.done{
-    border-color:#22c55e;
     background:#102d24;
+    border-color:#22c55e;
 }
 
 .material-item input{
@@ -254,111 +341,137 @@ button{
 
 .material-name{
     flex:1;
+    line-height:1.4;
 }
 
 .material-status{
-    font-size:12px;
     color:#94a3b8;
+    font-size:11px;
 }
 
-.done .material-status{
+.material-item.done .material-status{
     color:#4ade80;
 }
 
 /* STATISTICS */
+.stat-gender-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
+}
 
-.statistik-grid{
+.stat-gender-btn{
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:#12243a;
+    color:#cbd5e1;
+    font-weight:bold;
+}
+
+.stat-gender-btn.active.putra{
+    background:#2563eb;
+    color:white;
+}
+
+.stat-gender-btn.active.putri{
+    background:#db2777;
+    color:white;
+}
+
+.stats-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:15px;
+    gap:12px;
+    margin-bottom:20px;
 }
 
 .stat-box{
     background:#12243a;
     border:1px solid #243b53;
     border-radius:17px;
-    padding:20px;
+    padding:18px;
     text-align:center;
 }
 
 .stat-number{
-    font-size:30px;
-    font-weight:bold;
     color:#38bdf8;
+    font-size:28px;
+    font-weight:bold;
 }
 
 .stat-label{
     color:#94a3b8;
+    font-size:12px;
     margin-top:5px;
 }
 
-/* RANKING */
+/* SELECT */
+select{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border-radius:12px;
+    background:#081423;
+    color:white;
+    border:1px solid #29435e;
+    outline:none;
+}
 
-.ranking{
+/* CHART */
+.chart{
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:15px;
     margin-top:20px;
 }
 
-.rank-item{
-    background:#12243a;
-    border:1px solid #243b53;
-    border-radius:15px;
-    padding:15px;
+.chart-row{
+    width:100%;
 }
 
-.rank-top{
+.chart-header{
     display:flex;
     justify-content:space-between;
-    margin-bottom:9px;
+    margin-bottom:7px;
+    gap:10px;
 }
 
-.rank-name{
+.chart-name{
     font-weight:bold;
 }
 
-.rank-value{
+.chart-value{
     color:#38bdf8;
     font-weight:bold;
 }
 
-.rank-bar{
-    height:12px;
+.chart-background{
+    width:100%;
+    height:25px;
     background:#1e293b;
-    border-radius:20px;
+    border-radius:8px;
     overflow:hidden;
 }
 
-.rank-fill{
+.chart-bar{
     height:100%;
     background:#22c55e;
-}
-
-/* SELECT */
-
-select{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    background:#081423;
-    border:1px solid #29435e;
-    color:white;
-    outline:none;
-    margin-top:12px;
+    border-radius:8px;
+    transition:width .5s;
 }
 
 /* MODAL */
-
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.7);
+    background:rgba(0,0,0,.75);
     display:none;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     padding:20px;
-    z-index:1000;
+    z-index:999;
 }
 
 .modal.show{
@@ -384,32 +497,40 @@ select{
     color:#cbd5e1;
 }
 
+.form-group input,
+.form-group select{
+    margin-top:0;
+}
+
 .form-group input{
     width:100%;
-    padding:13px;
+    padding:14px;
     border-radius:12px;
-    border:1px solid #29435e;
     background:#081423;
     color:white;
+    border:1px solid #29435e;
     outline:none;
 }
 
 .modal-actions{
-    display:flex;
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:10px;
 }
 
-.modal-actions button{
-    flex:1;
+/* EMPTY */
+.empty{
+    text-align:center;
+    color:#94a3b8;
+    padding:40px 20px;
 }
 
 /* TOAST */
-
 .toast{
     position:fixed;
-    left:50%;
     bottom:25px;
-    transform:translateX(-50%) translateY(100px);
+    left:50%;
+    transform:translate(-50%,100px);
     background:#22c55e;
     color:white;
     padding:13px 20px;
@@ -417,19 +538,15 @@ select{
     opacity:0;
     transition:.3s;
     z-index:9999;
+    white-space:nowrap;
 }
 
 .toast.show{
     opacity:1;
-    transform:translateX(-50%) translateY(0);
+    transform:translate(-50%,0);
 }
 
-.empty{
-    text-align:center;
-    padding:35px;
-    color:#94a3b8;
-}
-
+/* MOBILE */
 @media(max-width:700px){
 
     .container{
@@ -441,18 +558,22 @@ select{
     }
 
     .student-list,
-    .category-grid,
-    .statistik-grid{
+    .category-grid{
         grid-template-columns:1fr;
     }
 
-    .nav{
-        flex-direction:column;
+    .stats-grid{
+        grid-template-columns:1fr;
     }
 
-    .rank-top{
-        gap:10px;
+    .student-actions{
+        grid-template-columns:1fr 45px 45px;
     }
+
+    .chart-value{
+        font-size:12px;
+    }
+
 }
 </style>
 </head>
@@ -461,1773 +582,3618 @@ select{
 
 <div class="container">
 
-<div class="header">
+    <!-- HEADER -->
+    <div class="header">
+        <h1>📚 Hafalan Santri</h1>
 
-<h1>📚 Hafalan Santri</h1>
-
-<p>
-JUZ 30 • Aqidah • Dzikiran • Al-Ma'surat • Awamil • Amsilati
-</p>
-
-</div>
+        <p>
+            JUZ 30 • AQIDAH • DZIKIR • AL-MA'SURAT • AWAMIL • AMSILATI
+        </p>
+    </div>
 
 
-<!-- NAV -->
+    <!-- NAVIGASI -->
+    <div class="main-nav">
 
-<div class="nav">
+        <button
+            id="navSiswa"
+            class="nav-btn active"
+            onclick="showHome()">
 
-<button
-class="btn btn-primary"
-onclick="showHome()">
+            👥 DATA SISWA
 
-👥 Data Siswa
+        </button>
 
-</button>
+        <button
+            id="navStatistik"
+            class="nav-btn"
+            onclick="showStatistics()">
 
-<button
-class="btn btn-success"
-onclick="showStatistics()">
+            📊 STATISTIK
 
-📊 Statistik
+        </button>
 
-</button>
+    </div>
+
+
+    <!-- =====================================================
+         HOME / DATA SISWA
+    ====================================================== -->
+
+    <div id="homePage" class="page active">
+
+        <div class="card">
+
+            <h2>👥 Data Siswa</h2>
+
+            <p style="color:#94a3b8;margin-top:5px">
+                Pilih kelompok siswa
+            </p>
+
+
+            <div class="gender-tabs">
+
+                <button
+                    id="putraTab"
+                    class="gender-btn putra active"
+                    onclick="setGender('putra')">
+
+                    👦 PUTRA
+
+                </button>
+
+                <button
+                    id="putriTab"
+                    class="gender-btn putri"
+                    onclick="setGender('putri')">
+
+                    👧 PUTRI
+
+                </button>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="🔎 Cari nama siswa..."
+                    oninput="renderStudents()">
+
+            </div>
+
+
+            <button
+                class="btn btn-primary full-btn"
+                onclick="openAddStudent()">
+
+                ➕ Tambah Siswa
+
+            </button>
+
+        </div>
+
+
+        <div id="studentList" class="student-list"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DETAIL SISWA
+    ====================================================== -->
+
+    <div id="studentPage" class="page">
+
+        <button
+            class="btn btn-secondary back-btn"
+            onclick="showHome()">
+
+            ← Kembali
+
+        </button>
+
+
+        <div class="card">
+
+            <div class="student-header">
+
+                <div>
+
+                    <h2 id="detailName" class="detail-title">
+                        Nama
+                    </h2>
+
+                    <p id="detailClass" class="detail-class">
+                        Kelas
+                    </p>
+
+                </div>
+
+                <div id="detailGender"
+                     class="gender-badge">
+
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div
+                    id="detailProgressBar"
+                    class="progress-bar"
+                    style="width:0%">
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="detailProgressText"
+                class="progress-text">
+
+                0%
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>📚 Pilih Hafalan</h2>
+
+            <p
+                style="color:#94a3b8;margin-top:5px;margin-bottom:18px">
+
+                Pilih materi yang ingin diisi.
+
+            </p>
+
+
+            <div class="category-grid">
+
+                <button
+                    class="category"
+                    onclick="openCategory('juz30')">
+
+                    <div class="category-icon">📖</div>
+
+                    <h3>JUZ 30</h3>
+
+                    <p>37 surat</p>
+
+                </button>
+
+
+                <button
+                    class="category"
+                    onclick="openCategory('aqidah')">
+
+                    <div class="category-icon">🕌</div>
+
+                    <h3>AQIDAH</h3>
+
+                    <p>9 materi</p>
+
+                </button>
+
+
+                <button
+                    class="category"
+                    onclick="openCategory('dzikiran')">
+
+                    <div class="category-icon">🤲</div>
+
+                    <h3>DZIKIR BA'DA SHOLAT</h3>
+
+                    <p>6 materi</p>
+
+                </button>
+
+
+                <button
+                    class="category"
+                    onclick="openCategory('awamil')">
+
+                    <div class="category-icon">📚</div>
+
+                    <h3>AWAMIL</h3>
+
+                    <p>17 materi</p>
+
+                </button>
+
+
+                <button
+                    class="category"
+                    onclick="openCategory('amsilati')">
+
+                    <div class="category-icon">📕</div>
+
+                    <h3>AMSILATI</h3>
+
+                    <p>30 materi</p>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MATERI
+    ====================================================== -->
+
+    <div id="materialPage" class="page">
+
+        <button
+            class="btn btn-secondary back-btn"
+            onclick="showStudent()">
+
+            ← Kembali
+
+        </button>
+
+
+        <div class="card">
+
+            <h2 id="materialTitle">
+                Materi
+            </h2>
+
+            <p
+                id="materialSubtitle"
+                style="color:#94a3b8;margin-top:5px">
+
+                Nama siswa
+
+            </p>
+
+
+            <div class="progress">
+
+                <div
+                    id="materialProgressBar"
+                    class="progress-bar"
+                    style="width:0%">
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="materialProgressText"
+                class="progress-text"
+                style="margin-bottom:20px">
+
+                0 / 0 hafal
+
+            </div>
+
+
+            <div
+                id="materialList"
+                class="material-list">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STATISTIK
+    ====================================================== -->
+
+    <div id="statisticsPage" class="page">
+
+        <div class="card">
+
+            <h2>📊 Statistik Hafalan</h2>
+
+            <p
+                style="color:#94a3b8;margin-top:5px">
+
+                Ranking hafalan berdasarkan kelompok siswa.
+
+            </p>
+
+
+            <div class="stat-gender-tabs">
+
+                <button
+                    id="statPutra"
+                    class="stat-gender-btn putra active"
+                    onclick="setStatGender('putra')">
+
+                    👦 PUTRA
+
+                </button>
+
+
+                <button
+                    id="statPutri"
+                    class="stat-gender-btn putri"
+                    onclick="setStatGender('putri')">
+
+                    👧 PUTRI
+
+                </button>
+
+            </div>
+
+
+            <select
+                id="statCategory"
+                onchange="renderStatistics()">
+
+                <option value="juz30">
+                    📖 JUZ 30
+                </option>
+
+                <option value="aqidah">
+                    🕌 AQIDAH
+                </option>
+
+                <option value="dzikiran">
+                    🤲 DZIKIR BA'DA SHOLAT
+                </option>
+
+                <option value="awamil">
+                    📚 AWAMIL
+                </option>
+
+                <option value="amsilati">
+                    📕 AMSILATI
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+
+                <div
+                    id="statJumlahSiswa"
+                    class="stat-number">
+
+                    0
+
+                </div>
+
+                <div class="stat-label">
+                    Jumlah Siswa
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div
+                    id="statTotalSetoran"
+                    class="stat-number">
+
+                    0
+
+                </div>
+
+                <div class="stat-label">
+                    Total Hafalan
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div
+                    id="statTerbanyak"
+                    class="stat-number">
+
+                    0
+
+                </div>
+
+                <div class="stat-label">
+                    Terbanyak
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2 id="rankingTitle">
+                🏆 Ranking Putra
+            </h2>
+
+
+            <div
+                id="rankingList"
+                class="chart">
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
 
 <!-- =====================================================
-HOME
-===================================================== -->
+     MODAL TAMBAH SISWA
+====================================================== -->
 
-<div
-id="homePage"
-class="page active">
+<div id="studentModal" class="modal">
 
-<div class="card">
+    <div class="modal-box">
 
-<div class="search-box">
+        <h2>➕ Tambah Siswa</h2>
 
-<input
-id="searchInput"
-type="text"
-placeholder="🔎 Cari nama siswa..."
-oninput="renderStudents()">
+        <br>
+
+
+        <div class="form-group">
+
+            <label>
+                Nama Siswa
+            </label>
+
+            <input
+                id="studentNameInput"
+                type="text"
+                placeholder="Contoh: Ahmad Fauzan">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Kelas
+            </label>
+
+            <input
+                id="studentClassInput"
+                type="text"
+                placeholder="Contoh: 8A">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Jenis Kelamin
+            </label>
+
+            <select id="studentGenderInput">
+
+                <option value="putra">
+                    👦 Putra
+                </option>
+
+                <option value="putri">
+                    👧 Putri
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn btn-secondary"
+                onclick="closeAddStudent()">
+
+                Batal
+
+            </button>
+
+
+            <button
+                class="btn btn-success"
+                onclick="saveStudent()">
+
+                Simpan
+
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
 
-<button
-class="btn btn-primary"
-onclick="openAddStudent()">
+<!-- TOAST -->
 
-➕ Tambah Siswa
-
-</button>
-
+<div id="toast" class="toast">
+    Tersimpan
 </div>
-
-
-<div
-id="studentList"
-class="student-list">
-
-</div>
-
-</div>
-
 
 
 <!-- =====================================================
-DETAIL SISWA
-===================================================== -->
-
-<div
-id="studentPage"
-class="page">
-
-<button
-class="btn btn-secondary"
-onclick="showHome()">
-
-← Kembali
-
-</button>
-
-
-<div class="card">
-
-<h2 id="detailName">
-Nama
-</h2>
-
-<p
-id="detailClass"
-style="color:#94a3b8;margin-top:5px">
-
-Kelas
-
-</p>
-
-
-<div class="progress">
-
-<div
-id="detailProgressBar"
-class="progress-bar"
-style="width:0%">
-
-</div>
-
-</div>
-
-
-<div
-id="detailProgressText"
-class="progress-text">
-
-0%
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2 style="margin-bottom:17px">
-
-📚 Pilih Hafalan
-
-</h2>
-
-
-<div class="category-grid">
-
-
-<button
-class="category"
-onclick="openCategory('juz30')">
-
-<div class="category-icon">
-📖
-</div>
-
-<h3>JUZ 30</h3>
-
-<p>
-37 surat
-</p>
-
-</button>
-
-
-<button
-class="category"
-onclick="openCategory('aqidah')">
-
-<div class="category-icon">
-🕌
-</div>
-
-<h3>AQIDAH</h3>
-
-<p>
-Materi Aqidah
-</p>
-
-</button>
-
-
-<button
-class="category"
-onclick="openCategory('dzikiran')">
-
-<div class="category-icon">
-🤲
-</div>
-
-<h3>DZIKIRAN</h3>
-
-<p>
-Ba'da Sholat
-</p>
-
-</button>
-
-
-<button
-class="category"
-onclick="openCategory('almasurat')">
-
-<div class="category-icon">
-📿
-</div>
-
-<h3>AL-MA'SURAT</h3>
-
-<p>
-Checklist
-</p>
-
-</button>
-
-
-<button
-class="category"
-onclick="openCategory('awamil')">
-
-<div class="category-icon">
-📚
-</div>
-
-<h3>AWAMIL</h3>
-
-<p>
-Checklist
-</p>
-
-</button>
-
-
-<button
-class="category"
-onclick="openCategory('amsilati')">
-
-<div class="category-icon">
-📕
-</div>
-
-<h3>AMSILATI</h3>
-
-<p>
-Checklist
-</p>
-
-</button>
-
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-MATERI
-===================================================== -->
-
-<div
-id="materialPage"
-class="page">
-
-<button
-class="btn btn-secondary"
-onclick="showStudent()">
-
-← Kembali
-
-</button>
-
-
-<div class="card">
-
-<h2 id="materialTitle">
-Materi
-</h2>
-
-<p
-id="materialSubtitle"
-style="color:#94a3b8;margin-top:5px">
-
-Nama
-
-</p>
-
-
-<div class="progress">
-
-<div
-id="materialProgressBar"
-class="progress-bar"
-style="width:0%">
-
-</div>
-
-</div>
-
-
-<div
-id="materialProgressText"
-class="progress-text"
-style="margin-bottom:20px">
-
-0 / 0
-
-</div>
-
-
-<div
-id="materialList"
-class="material-list">
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-STATISTIK
-===================================================== -->
-
-<div
-id="statisticsPage"
-class="page">
-
-<div class="card">
-
-<h2>
-📊 Statistik Hafalan
-</h2>
-
-<p
-style="color:#94a3b8;margin-top:5px">
-
-Lihat ranking setoran setiap materi.
-
-</p>
-
-
-<select
-id="statCategory"
-onchange="renderStatistics()">
-
-<option value="juz30">
-📖 JUZ 30
-</option>
-
-<option value="aqidah">
-🕌 AQIDAH
-</option>
-
-<option value="dzikiran">
-🤲 DZIKIRAN BA'DA SHOLAT
-</option>
-
-<option value="almasurat">
-📿 AL-MA'SURAT
-</option>
-
-<option value="awamil">
-📚 AWAMIL
-</option>
-
-<option value="amsilati">
-📕 AMSILATI
-</option>
-
-</select>
-
-</div>
-
-
-<div class="statistik-grid">
-
-<div class="stat-box">
-
-<div
-id="statTotalSiswa"
-class="stat-number">
-
-0
-
-</div>
-
-<div class="stat-label">
-Jumlah Siswa
-</div>
-
-</div>
-
-
-<div class="stat-box">
-
-<div
-id="statTotalSetoran"
-class="stat-number">
-
-0
-
-</div>
-
-<div class="stat-label">
-Total Setoran
-</div>
-
-</div>
-
-
-<div class="stat-box">
-
-<div
-id="statTerbanyak"
-class="stat-number">
-
--
-
-</div>
-
-<div class="stat-label">
-Setoran Terbanyak
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>
-🏆 Ranking Setoran
-</h2>
-
-<div
-id="rankingList"
-class="ranking">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- MODAL -->
-
-<div
-id="studentModal"
-class="modal">
-
-<div class="modal-box">
-
-<h2>
-➕ Tambah Siswa
-</h2>
-
-<br>
-
-<div class="form-group">
-
-<label>
-Nama Siswa
-</label>
-
-<input
-id="studentNameInput"
-type="text"
-placeholder="Contoh: Ahmad">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Kelas
-</label>
-
-<input
-id="studentClassInput"
-type="text"
-placeholder="Contoh: 8A">
-
-</div>
-
-
-<div class="modal-actions">
-
-<button
-class="btn btn-secondary"
-onclick="closeAddStudent()">
-
-Batal
-
-</button>
-
-<button
-class="btn btn-success"
-onclick="saveStudent()">
-
-Simpan
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<div
-id="toast"
-class="toast">
-
-Tersimpan
-
-</div>
-
-
+     FIREBASE
+====================================================== -->
 
 <script type="module">
 
 import {
-initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
-getFirestore,
-collection,
-addDoc,
-getDocs,
-updateDoc,
-deleteDoc,
-doc,
-serverTimestamp
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-
-/* FIREBASE */
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyCdOLEzXU0JqYL_3W6N1ClwlQCF4Njms2U",
-
-authDomain:
-"hafalan-8e6e4.firebaseapp.com",
-
-projectId:
-"hafalan-8e6e4",
-
-storageBucket:
-"hafalan-8e6e4.firebasestorage.app",
-
-messagingSenderId:
-"859030286938",
-
-appId:
-"1:859030286938:web:c42079d7780e253e589e63",
-
-measurementId:
-"G-QE2VL93VK3"
-
-};
-
-
-const app =
-initializeApp(firebaseConfig);
-
-const db =
-getFirestore(app);
-
-const siswaCollection =
-collection(db,"siswa");
-
-
-
-/* MATERI */
-
-const materi = {
-
-juz30:[
-
-"An-Naba",
-"An-Nazi'at",
-"'Abasa",
-"At-Takwir",
-"Al-Infitar",
-"Al-Mutaffifin",
-"Al-Insyiqaq",
-"Al-Buruj",
-"At-Tariq",
-"Al-A'la",
-"Al-Ghasyiyah",
-"Al-Fajr",
-"Al-Balad",
-"Asy-Syams",
-"Al-Lail",
-"Ad-Duha",
-"Asy-Syarh",
-"At-Tin",
-"Al-'Alaq",
-"Al-Qadr",
-"Al-Bayyinah",
-"Az-Zalzalah",
-"Al-'Adiyat",
-"Al-Qari'ah",
-"At-Takatsur",
-"Al-'Asr",
-"Al-Humazah",
-"Al-Fil",
-"Quraisy",
-"Al-Ma'un",
-"Al-Kautsar",
-"Al-Kafirun",
-"An-Nasr",
-"Al-Lahab",
-"Al-Ikhlas",
-"Al-Falaq",
-"An-Nas"
-
-],
-
-aqidah:[
-
-"Kisah Nabi Muhammad SAW",
-
-"Sifat Wajib bagi Allah beserta artinya",
-
-"Nadhom Silsilah Nabi",
-
-"Sifat Wajib bagi Allah",
-
-"Nama-nama Malaikat dan tugasnya",
-
-"Nama-nama Anak Nabi",
-
-"Nama-nama Nabi & Rasul",
-
-"Sifat Mustahil bagi Allah beserta artinya",
-
-"Sifat Wajib dan Mustahil bagi Rasul beserta artinya"
-
-],
-
-dzikiran:[
-
-"Dzikiran Ba'da Sholat"
-
-],
-
-almasurat:[
-
-"Al-Ma'surat"
-
-],
-
-awamil:[
-
-"Awamil"
-
-],
-
-amsilati:[
-
-"Amsilati"
-
-]
-
-};
-
-
-const namaMateri={
-
-juz30:"📖 JUZ 30",
-
-aqidah:"🕌 AQIDAH",
-
-dzikiran:"🤲 DZIKIRAN BA'DA SHOLAT",
-
-almasurat:"📿 AL-MA'SURAT",
-
-awamil:"📚 AWAMIL",
-
-amsilati:"📕 AMSILATI"
-
-};
-
-
-
-let siswaData=[];
-
-let siswaAktif=null;
-
-let kategoriAktif=null;
-
-
-
-/* LOAD */
-
-async function loadStudents(){
-
-try{
-
-const snapshot=
-await getDocs(
-siswaCollection
-);
-
-siswaData=[];
-
-snapshot.forEach(item=>{
-
-siswaData.push({
-
-id:item.id,
-
-...item.data()
-
-});
-
-});
-
-renderStudents();
-
-renderStatistics();
-
-}catch(error){
-
-console.error(error);
-
-showToast(
-"❌ Gagal mengambil data"
-);
-
-}
-
-}
-
-
-
-/* HOME */
-
-window.showHome=function(){
-
-hidePages();
-
-document
-.getElementById("homePage")
-.classList.add("active");
-
-renderStudents();
-
-};
-
-
-
-window.showStatistics=function(){
-
-hidePages();
-
-document
-.getElementById("statisticsPage")
-.classList.add("active");
-
-renderStatistics();
-
-};
-
-
-
-function showStudent(){
-
-hidePages();
-
-document
-.getElementById("studentPage")
-.classList.add("active");
-
-};
-
-
-
-window.showStudent=showStudent;
-
-
-
-function hidePages(){
-
-document
-.querySelectorAll(".page")
-.forEach(page=>{
-
-page.classList.remove("active");
-
-});
-
-}
-
-
-
-/* SISWA */
-
-window.renderStudents=function(){
-
-const container=
-document.getElementById(
-"studentList"
-);
-
-const keyword=
-document
-.getElementById("searchInput")
-.value
-.toLowerCase();
-
-
-const hasil=
-siswaData.filter(siswa=>
-(siswa.nama||"")
-.toLowerCase()
-.includes(keyword)
-);
-
-
-container.innerHTML="";
-
-
-if(hasil.length===0){
-
-container.innerHTML=`
-
-<div class="card empty">
-
-👤<br><br>
-
-Belum ada siswa.
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-hasil.forEach(siswa=>{
-
-const progress=
-getProgress(siswa);
-
-
-container.innerHTML+=`
-
-<div class="student">
-
-<div class="student-name">
-
-👤 ${escapeHTML(siswa.nama)}
-
-</div>
-
-<div class="student-class">
-
-Kelas ${escapeHTML(siswa.kelas)}
-
-</div>
-
-
-<div class="progress">
-
-<div
-class="progress-bar"
-style="width:${progress.percent}%">
-
-</div>
-
-</div>
-
-
-<div class="progress-text">
-
-${progress.hafal}/${progress.total}
-materi • ${progress.percent}%
-
-</div>
-
-
-<div class="student-actions">
-
-<button
-class="btn btn-primary"
-onclick="openStudent('${siswa.id}')">
-
-📚 Buka
-
-</button>
-
-
-<button
-class="btn btn-warning"
-onclick="editStudent('${siswa.id}')">
-
-✏️
-
-</button>
-
-
-<button
-class="btn btn-danger"
-onclick="deleteStudent('${siswa.id}')">
-
-🗑️
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-};
-
-
-
-function getProgress(siswa){
-
-let total=0;
-
-let hafal=0;
-
-
-Object.keys(materi).forEach(kategori=>{
-
-total+=materi[kategori].length;
-
-const data=
-siswa.hafalan?.[kategori]||{};
-
-
-materi[kategori]
-.forEach((_,index)=>{
-
-if(data[index]===true){
-
-hafal++;
-
-}
-
-});
-
-});
-
-
-return{
-
-total,
-
-hafal,
-
-percent:
-total
-? Math.round(
-(hafal/total)*100
-)
-:0
-
-};
-
-}
-
-
-
-/* ADD */
-
-window.openAddStudent=function(){
-
-document
-.getElementById("studentNameInput")
-.value="";
-
-document
-.getElementById("studentClassInput")
-.value="";
-
-
-document
-.getElementById("studentModal")
-.classList.add("show");
-
-};
-
-
-
-window.closeAddStudent=function(){
-
-document
-.getElementById("studentModal")
-.classList.remove("show");
-
-};
-
-
-
-window.saveStudent=async function(){
-
-const nama=
-document
-.getElementById("studentNameInput")
-.value.trim();
-
-
-const kelas=
-document
-.getElementById("studentClassInput")
-.value.trim();
-
-
-if(!nama||!kelas){
-
-alert(
-"Nama dan kelas wajib diisi!"
-);
-
-return;
-
-}
-
-
-try{
-
-await addDoc(
-
-siswaCollection,
-
-{
-
-nama,
-
-kelas,
-
-hafalan:{},
-
-createdAt:
-serverTimestamp(),
-
-updatedAt:
-serverTimestamp()
-
-}
-
-);
-
-
-closeAddStudent();
-
-await loadStudents();
-
-showToast(
-"✅ Siswa ditambahkan"
-);
-
-
-}catch(error){
-
-console.error(error);
-
-showToast(
-"❌ Gagal menambahkan"
-);
-
-}
-
-};
-
-
-
-/* OPEN STUDENT */
-
-window.openStudent=function(id){
-
-siswaAktif=
-siswaData.find(
-s=>s.id===id
-);
-
-
-if(!siswaAktif)return;
-
-
-document
-.getElementById("detailName")
-.textContent=
-"👤 "+siswaAktif.nama;
-
-
-document
-.getElementById("detailClass")
-.textContent=
-"Kelas "+siswaAktif.kelas;
-
-
-updateDetail();
-
-hidePages();
-
-document
-.getElementById("studentPage")
-.classList.add("active");
-
-};
-
-
-
-function updateDetail(){
-
-const progress=
-getProgress(siswaAktif);
-
-
-document
-.getElementById("detailProgressBar")
-.style.width=
-progress.percent+"%";
-
-
-document
-.getElementById("detailProgressText")
-.textContent=
-`${progress.hafal}/${progress.total} materi • ${progress.percent}%`;
-
-}
-
-
-
-/* CATEGORY */
-
-window.openCategory=function(kategori){
-
-kategoriAktif=kategori;
-
-
-document
-.getElementById("materialTitle")
-.textContent=
-namaMateri[kategori];
-
-
-document
-.getElementById("materialSubtitle")
-.textContent=
-"Hafalan "+siswaAktif.nama;
-
-
-renderMaterials();
-
-
-hidePages();
-
-document
-.getElementById("materialPage")
-.classList.add("active");
-
-};
-
-
-
-function renderMaterials(){
-
-const list=
-document
-.getElementById("materialList");
-
-
-list.innerHTML="";
-
-
-const daftar=
-materi[kategoriAktif];
-
-
-const data=
-siswaAktif
-.hafalan?.[kategoriAktif]||{};
-
-
-let hafal=0;
-
-
-daftar.forEach(
-(nama,index)=>{
-
-const checked=
-data[index]===true;
-
-
-if(checked)hafal++;
-
-
-const item=
-document.createElement(
-"label"
-);
-
-
-item.className=
-"material-item"+
-(
-checked
-?" done"
-:""
-);
-
-
-item.innerHTML=`
-
-<input
-type="checkbox"
-${checked?"checked":""}
->
-
-<div class="material-name">
-
-${escapeHTML(nama)}
-
-</div>
-
-<div class="material-status">
-
-${
-checked
-?"✓ Sudah Hafal"
-:"Belum Hafal"
-}
-
-</div>
-
-`;
-
-
-item
-.querySelector("input")
-.addEventListener(
-"change",
-e=>{
-
-saveChecklist(
-index,
-e.target.checked
-);
-
-});
-
-
-list.appendChild(item);
-
-});
-
-
-const percent=
-daftar.length
-?Math.round(
-(hafal/daftar.length)*100
-)
-:0;
-
-
-document
-.getElementById(
-"materialProgressBar"
-)
-.style.width=
-percent+"%";
-
-
-document
-.getElementById(
-"materialProgressText"
-)
-.textContent=
-`${hafal}/${daftar.length} hafal • ${percent}%`;
-
-}
-
-
-
-/* CHECKLIST */
-
-async function saveChecklist(
-index,
-value
-){
-
-try{
-
-const siswaRef=
-doc(
-db,
-"siswa",
-siswaAktif.id
-);
-
-
-const hafalan=
-siswaAktif.hafalan||{};
-
-
-if(!hafalan[kategoriAktif]){
-
-hafalan[kategoriAktif]={};
-
-}
-
-
-hafalan[kategoriAktif][index]=
-value;
-
-
-await updateDoc(
-
-siswaRef,
-
-{
-
-hafalan,
-
-updatedAt:
-serverTimestamp()
-
-}
-
-);
-
-
-siswaAktif.hafalan=
-hafalan;
-
-
-const indexSiswa=
-siswaData.findIndex(
-s=>s.id===siswaAktif.id
-);
-
-
-if(indexSiswa!==-1){
-
-siswaData[indexSiswa]=
-siswaAktif;
-
-}
-
-
-renderMaterials();
-
-updateDetail();
-
-renderStatistics();
-
-showToast(
-value
-?"✅ Setoran disimpan"
-:"↩️ Setoran dibatalkan"
-);
-
-
-}catch(error){
-
-console.error(error);
-
-showToast(
-"❌ Gagal menyimpan"
-);
-
-}
-
-}
-
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* =====================================================
-   STATISTIK / RANKING
+   FIREBASE CONFIG
 ===================================================== */
 
-window.renderStatistics=function(){
+const firebaseConfig = {
 
-const kategori=
-document
-.getElementById("statCategory")
-.value;
+    apiKey:
+    "AIzaSyCdOLEwL0UqYL_3W6N1ClwlQCF4Njms2U",
 
+    authDomain:
+    "hafalan-8e6e4.firebaseapp.com",
 
-const ranking=[];
+    projectId:
+    "hafalan-8e6e4",
 
+    storageBucket:
+    "hafalan-8e6e4.firebasestorage.app",
 
-siswaData.forEach(siswa=>{
+    messagingSenderId:
+    "859030286938",
 
-const data=
-siswa.hafalan?.[kategori]||{};
+    appId:
+    "1:859030286938:web:c42079d7780e253e589e63",
 
-
-let jumlah=0;
-
-
-materi[kategori]
-.forEach((_,index)=>{
-
-if(data[index]===true){
-
-jumlah++;
-
-}
-
-});
-
-
-ranking.push({
-
-nama:siswa.nama,
-
-jumlah
-
-});
-
-});
-
-
-/* SORT TERBANYAK */
-
-ranking.sort(
-(a,b)=>b.jumlah-a.jumlah
-);
-
-
-const totalSetoran=
-ranking.reduce(
-(total,item)=>
-total+item.jumlah,
-0
-);
-
-
-const terbanyak=
-ranking.length
-?ranking[0]
-:null;
-
-
-document
-.getElementById("statTotalSiswa")
-.textContent=
-ranking.length;
-
-
-document
-.getElementById("statTotalSetoran")
-.textContent=
-totalSetoran;
-
-
-document
-.getElementById("statTerbanyak")
-.textContent=
-terbanyak
-?terbanyak.jumlah
-:0;
-
-
-const container=
-document
-.getElementById("rankingList");
-
-
-container.innerHTML="";
-
-
-if(ranking.length===0){
-
-container.innerHTML=`
-
-<div class="empty">
-
-Belum ada data siswa.
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-const max=
-Math.max(
-...ranking.map(
-item=>item.jumlah
-),
-1
-);
-
-
-ranking.forEach(
-(item,index)=>{
-
-const percent=
-Math.round(
-(item.jumlah/max)*100
-);
-
-
-let emoji="";
-
-
-if(index===0)emoji="🥇";
-
-else if(index===1)emoji="🥈";
-
-else if(index===2)emoji="🥉";
-
-else emoji="";
-
-
-container.innerHTML+=`
-
-<div class="rank-item">
-
-<div class="rank-top">
-
-<div class="rank-name">
-
-${emoji}
-${index+1}. 
-${escapeHTML(item.nama)}
-
-</div>
-
-<div class="rank-value">
-
-${item.jumlah}
-/
-${materi[kategori].length}
-
-</div>
-
-</div>
-
-
-<div class="rank-bar">
-
-<div
-class="rank-fill"
-style="width:${percent}%">
-
-</div>
-
-</div>
-
-
-<div class="progress-text">
-
-${item.jumlah}
-materi sudah hafal
-
-</div>
-
-</div>
-
-`;
-
-});
+    measurementId:
+    "G-QE2VL93VK3"
 
 };
 
 
+/* =====================================================
+   FIREBASE INIT
+===================================================== */
 
-/* EDIT */
+const app =
+    initializeApp(firebaseConfig);
 
-window.editStudent=async function(id){
+const db =
+    getFirestore(app);
 
-const siswa=
-siswaData.find(
-s=>s.id===id
-);
-
-
-const nama=
-prompt(
-"Nama siswa:",
-siswa.nama
-);
+const siswaCollection =
+    collection(db,"siswa");
 
 
-if(nama===null)return;
+/* =====================================================
+   MATERI HAFALAN
+===================================================== */
 
+const materi = {
 
-const kelas=
-prompt(
-"Kelas:",
-siswa.kelas
-);
+    /* =========<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Hafalan Santri</title>
 
-if(kelas===null)return;
-
-
-try{
-
-await updateDoc(
-
-doc(
-db,
-"siswa",
-id
-),
-
-{
-
-nama:nama.trim(),
-
-kelas:kelas.trim(),
-
-updatedAt:
-serverTimestamp()
-
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-);
-
-
-await loadStudents();
-
-showToast(
-"✅ Data diperbarui"
-);
-
-
-}catch(error){
-
-console.error(error);
-
-showToast(
-"❌ Gagal memperbarui"
-);
-
+body{
+    background:#07111f;
+    color:#fff;
+    min-height:100vh;
 }
 
-};
-
-
-
-/* DELETE */
-
-window.deleteStudent=async function(id){
-
-const siswa=
-siswaData.find(
-s=>s.id===id
-);
-
-
-if(!siswa)return;
-
-
-const yakin=
-confirm(
-`Hapus ${siswa.nama} beserta semua data hafalannya?`
-);
-
-
-if(!yakin)return;
-
-
-try{
-
-await deleteDoc(
-doc(
-db,
-"siswa",
-id
-)
-);
-
-
-await loadStudents();
-
-showToast(
-"🗑️ Siswa dihapus"
-);
-
-
-}catch(error){
-
-console.error(error);
-
-showToast(
-"❌ Gagal menghapus"
-);
-
+button,input,select{
+    font-family:inherit;
 }
 
-};
+button{
+    cursor:pointer;
+}
 
+.container{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:15px;
+}
 
+/* HEADER */
+.header{
+    text-align:center;
+    padding:25px 10px;
+}
+
+.header h1{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.header p{
+    color:#94a3b8;
+    font-size:14px;
+}
+
+/* NAV */
+.main-nav{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.nav-btn{
+    border:none;
+    border-radius:15px;
+    padding:15px;
+    background:#12243a;
+    color:#cbd5e1;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.nav-btn.active{
+    background:#0ea5e9;
+    color:white;
+}
+
+/* PAGE */
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* CARD */
+.card{
+    background:#0f1c2e;
+    border:1px solid #1e334d;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+/* GENDER */
+.gender-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:20px 0 15px;
+}
+
+.gender-btn{
+    padding:15px;
+    border-radius:15px;
+    border:1px solid #29435e;
+    background:#12243a;
+    color:#cbd5e1;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.gender-btn.active.putra{
+    background:#2563eb;
+    color:white;
+    border-color:#2563eb;
+}
+
+.gender-btn.active.putri{
+    background:#db2777;
+    color:white;
+    border-color:#db2777;
+}
+
+/* SEARCH */
+.search-box{
+    margin-bottom:15px;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px 17px;
+    border-radius:14px;
+    border:1px solid #29435e;
+    background:#081423;
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+.search-box input:focus{
+    border-color:#38bdf8;
+}
+
+/* BUTTON */
+.btn{
+    border:none;
+    border-radius:12px;
+    padding:12px 18px;
+    font-weight:bold;
+    color:white;
+}
+
+.btn-primary{
+    background:#0ea5e9;
+}
+
+.btn-success{
+    background:#22c55e;
+}
+
+.btn-danger{
+    background:#ef4444;
+}
+
+.btn-warning{
+    background:#f59e0b;
+}
+
+.btn-secondary{
+    background:#334155;
+}
+
+.full-btn{
+    width:100%;
+}
+
+/* STUDENTS */
+.student-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.student{
+    background:#12243a;
+    border:1px solid #203b57;
+    border-radius:18px;
+    padding:18px;
+    transition:.2s;
+}
+
+.student:hover{
+    transform:translateY(-2px);
+    border-color:#38bdf8;
+}
+
+.student-header{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.student-name{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.student-class{
+    color:#94a3b8;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.gender-badge{
+    padding:5px 9px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:bold;
+    height:max-content;
+}
+
+.gender-badge.putra{
+    background:#1d4ed8;
+}
+
+.gender-badge.putri{
+    background:#be185d;
+}
+
+/* PROGRESS */
+.progress{
+    height:9px;
+    background:#1e293b;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress-bar{
+    height:100%;
+    background:#22c55e;
+    border-radius:20px;
+    transition:.3s;
+}
+
+.progress-text{
+    color:#94a3b8;
+    font-size:12px;
+    margin-top:7px;
+}
+
+/* STUDENT ACTION */
+.student-actions{
+    display:grid;
+    grid-template-columns:1fr 45px 45px;
+    gap:7px;
+    margin-top:15px;
+}
+
+/* DETAIL */
+.detail-title{
+    font-size:25px;
+}
+
+.detail-class{
+    color:#94a3b8;
+    margin-top:5px;
+}
+
+/* CATEGORY */
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.category{
+    background:#12243a;
+    border:1px solid #263f59;
+    color:white;
+    padding:20px;
+    border-radius:18px;
+    text-align:left;
+    transition:.2s;
+}
+
+.category:hover{
+    border-color:#38bdf8;
+    transform:translateY(-2px);
+}
+
+.category-icon{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.category h3{
+    margin-bottom:6px;
+    font-size:17px;
+}
+
+.category p{
+    color:#94a3b8;
+    font-size:13px;
+}
+
+/* MATERIAL */
+.back-btn{
+    margin-bottom:15px;
+}
+
+.material-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.material-item{
+    background:#12243a;
+    border:1px solid #243b53;
+    border-radius:15px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    cursor:pointer;
+}
+
+.material-item.done{
+    background:#102d24;
+    border-color:#22c55e;
+}
+
+.material-item input{
+    width:22px;
+    height:22px;
+    accent-color:#22c55e;
+}
+
+.material-name{
+    flex:1;
+    line-height:1.4;
+}
+
+.material-status{
+    color:#94a3b8;
+    font-size:11px;
+}
+
+.material-item.done .material-status{
+    color:#4ade80;
+}
+
+/* STATISTICS */
+.stat-gender-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
+}
+
+.stat-gender-btn{
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:#12243a;
+    color:#cbd5e1;
+    font-weight:bold;
+}
+
+.stat-gender-btn.active.putra{
+    background:#2563eb;
+    color:white;
+}
+
+.stat-gender-btn.active.putri{
+    background:#db2777;
+    color:white;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.stat-box{
+    background:#12243a;
+    border:1px solid #243b53;
+    border-radius:17px;
+    padding:18px;
+    text-align:center;
+}
+
+.stat-number{
+    color:#38bdf8;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.stat-label{
+    color:#94a3b8;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* SELECT */
+select{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border-radius:12px;
+    background:#081423;
+    color:white;
+    border:1px solid #29435e;
+    outline:none;
+}
+
+/* CHART */
+.chart{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin-top:20px;
+}
+
+.chart-row{
+    width:100%;
+}
+
+.chart-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    gap:10px;
+}
+
+.chart-name{
+    font-weight:bold;
+}
+
+.chart-value{
+    color:#38bdf8;
+    font-weight:bold;
+}
+
+.chart-background{
+    width:100%;
+    height:25px;
+    background:#1e293b;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.chart-bar{
+    height:100%;
+    background:#22c55e;
+    border-radius:8px;
+    transition:width .5s;
+}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:999;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:450px;
+    background:#0f1c2e;
+    border:1px solid #263f59;
+    border-radius:20px;
+    padding:22px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    color:#cbd5e1;
+}
+
+.form-group input,
+.form-group select{
+    margin-top:0;
+}
+
+.form-group input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    background:#081423;
+    color:white;
+    border:1px solid #29435e;
+    outline:none;
+}
+
+.modal-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    color:#94a3b8;
+    padding:40px 20px;
+}
 
 /* TOAST */
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translate(-50%,100px);
+    background:#22c55e;
+    color:white;
+    padding:13px 20px;
+    border-radius:12px;
+    opacity:0;
+    transition:.3s;
+    z-index:9999;
+    white-space:nowrap;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* MOBILE */
+@media(max-width:700px){
+
+    .container{
+        padding:12px;
+    }
+
+    .header h1{
+        font-size:25px;
+    }
+
+    .student-list,
+    .category-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .student-actions{
+        grid-template-columns:1fr 45px 45px;
+    }
+
+    .chart-value{
+        font-size:12px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>📚 Hafalan Santri</h1>
+
+        <p>
+            JUZ 30 • AQIDAH • DZIKIR • AL-MA'SURAT • AWAMIL • AMSILATI
+        </p>
+    </div>
+
+
+    <!-- NAVIGASI -->
+    <div class="main-nav">
+
+        <button
+            id="navSiswa"
+            class="nav-btn active"
+            onclick="showHome()">
+
+            👥 DATA SISWA
+
+        </button>
+
+        <button
+            id="navStatistik"
+            class="nav-btn"
+            onclick="showStatistics()">
+
+            📊 STATISTIK
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         HOME / DATA SISWA
+    ====================================================== -->
+
+    <div id="homePage" class="page active">
+
+        <div class="card">
+
+            <h2>👥 Data Siswa</h2>
+
+            <p style="color:#94a3b8;margin-top:5px">
+                Pilih kelompok siswa
+            </p>
+
+
+            <div class="gender-tabs">
+
+                <button
+                    id="putraTab"
+                    class="gender-btn putra active"
+                    onclick="setGender('putra')">
+
+                    👦 PUTRA
+
+                </button>
+
+                <button
+                    id="putriTab"
+                    class="gender-btn putri"
+                    onclick="setGender('putri')">
+
+                    👧 PUTRI
+
+                </button>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="🔎 Cari nama siswa..."
+                    oninput="renderStudents()">
+
+            </div>
+
+
+            <button
+                class="btn btn-primary full-btn"
+                onclick="openAddStudent()">
+
+                ➕ Tambah Siswa
+
+            </button>
+
+        </div>
+
+
+        <div id="studentList" class="student-list"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DETAIL SISWA
+    ====================================================== -->
+
+    <div id="studentPage" class="page">
+
+        <button
+            class="btn btn-secondary back-btn"
+            onclick="showHome()">
+
+            ← Kembali
+
+        </button>
+
+
+        <div class="card">
+
+            <div class="student-header">
+
+                <div>
+
+                    <h2 id="detailName" class="detail-title">
+                        Nama
+                    </h2>
+
+                    <p id="detailClass" class="detail-class">
+                        Kelas
+                    </p>
+
+                </div>
+
+                <div id="detailGender"
+                     class="gender-badge">
+
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div
+                    id="detailProgressBar"
+                    class="progress-bar"
+                    style="width:0%">
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="detailProgressText"
+                class="progress-text">
+
+                0%
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>📚 Pilih Hafalan</h2>
+
+            <p
+                style="color:#94a3b8;margin-top:5px;margin-bottom:18px">
+
+                Pilih materi yang ingin diisi.
+
+            </p>
+
+
+            <div class="category-grid">
+
+                <button
+                    class="category"
+                    onclick="openCategory('juz30')">
+
+                    <div class="category-icon">📖</div>
+
+                    <h3>JUZ 30</h3>
+
+                    <p>37 surat</p>
+
+                </button>
+
+
+                <button
+                    class="category"
+                    onclick="openCategory('aqidah')">
+
+                    <div class="category-icon">🕌</div>
+
+                    <h3>AQIDAH</h3>
+
+                    <p>9 materi</p>
+
+                </button>
+
+
+                <button
+                    class="category"
+                    onclick="openCategory('dzikiran')">
+
+                    <div class="category-icon">🤲</div>
+
+                    <h3>DZIKIR BA'DA SHOLAT</h3>
+
+                    <p>6 materi</p>
+
+                </button>
+
+
+                <button
+                    class="category"
+                    onclick="openCategory('awamil')">
+
+                    <div class="category-icon">📚</div>
+
+                    <h3>AWAMIL</h3>
+
+                    <p>17 materi</p>
+
+                </button>
+
+
+                <button
+                    class="category"
+                    onclick="openCategory('amsilati')">
+
+                    <div class="category-icon">📕</div>
+
+                    <h3>AMSILATI</h3>
+
+                    <p>30 materi</p>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MATERI
+    ====================================================== -->
+
+    <div id="materialPage" class="page">
+
+        <button
+            class="btn btn-secondary back-btn"
+            onclick="showStudent()">
+
+            ← Kembali
+
+        </button>
+
+
+        <div class="card">
+
+            <h2 id="materialTitle">
+                Materi
+            </h2>
+
+            <p
+                id="materialSubtitle"
+                style="color:#94a3b8;margin-top:5px">
+
+                Nama siswa
+
+            </p>
+
+
+            <div class="progress">
+
+                <div
+                    id="materialProgressBar"
+                    class="progress-bar"
+                    style="width:0%">
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="materialProgressText"
+                class="progress-text"
+                style="margin-bottom:20px">
+
+                0 / 0 hafal
+
+            </div>
+
+
+            <div
+                id="materialList"
+                class="material-list">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STATISTIK
+    ====================================================== -->
+
+    <div id="statisticsPage" class="page">
+
+        <div class="card">
+
+            <h2>📊 Statistik Hafalan</h2>
+
+            <p
+                style="color:#94a3b8;margin-top:5px">
+
+                Ranking hafalan berdasarkan kelompok siswa.
+
+            </p>
+
+
+            <div class="stat-gender-tabs">
+
+                <button
+                    id="statPutra"
+                    class="stat-gender-btn putra active"
+                    onclick="setStatGender('putra')">
+
+                    👦 PUTRA
+
+                </button>
+
+
+                <button
+                    id="statPutri"
+                    class="stat-gender-btn putri"
+                    onclick="setStatGender('putri')">
+
+                    👧 PUTRI
+
+                </button>
+
+            </div>
+
+
+            <select
+                id="statCategory"
+                onchange="renderStatistics()">
+
+                <option value="juz30">
+                    📖 JUZ 30
+                </option>
+
+                <option value="aqidah">
+                    🕌 AQIDAH
+                </option>
+
+                <option value="dzikiran">
+                    🤲 DZIKIR BA'DA SHOLAT
+                </option>
+
+                <option value="awamil">
+                    📚 AWAMIL
+                </option>
+
+                <option value="amsilati">
+                    📕 AMSILATI
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+
+                <div
+                    id="statJumlahSiswa"
+                    class="stat-number">
+
+                    0
+
+                </div>
+
+                <div class="stat-label">
+                    Jumlah Siswa
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div
+                    id="statTotalSetoran"
+                    class="stat-number">
+
+                    0
+
+                </div>
+
+                <div class="stat-label">
+                    Total Hafalan
+                </div>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <div
+                    id="statTerbanyak"
+                    class="stat-number">
+
+                    0
+
+                </div>
+
+                <div class="stat-label">
+                    Terbanyak
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2 id="rankingTitle">
+                🏆 Ranking Putra
+            </h2>
+
+
+            <div
+                id="rankingList"
+                class="chart">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL TAMBAH SISWA
+====================================================== -->
+
+<div id="studentModal" class="modal">
+
+    <div class="modal-box">
+
+        <h2>➕ Tambah Siswa</h2>
+
+        <br>
+
+
+        <div class="form-group">
+
+            <label>
+                Nama Siswa
+            </label>
+
+            <input
+                id="studentNameInput"
+                type="text"
+                placeholder="Contoh: Ahmad Fauzan">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Kelas
+            </label>
+
+            <input
+                id="studentClassInput"
+                type="text"
+                placeholder="Contoh: 8A">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Jenis Kelamin
+            </label>
+
+            <select id="studentGenderInput">
+
+                <option value="putra">
+                    👦 Putra
+                </option>
+
+                <option value="putri">
+                    👧 Putri
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn btn-secondary"
+                onclick="closeAddStudent()">
+
+                Batal
+
+            </button>
+
+
+            <button
+                class="btn btn-success"
+                onclick="saveStudent()">
+
+                Simpan
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast">
+    Tersimpan
+</div>
+
+
+<!-- =====================================================
+     FIREBASE
+====================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyCdOLEwL0UqYL_3W6N1ClwlQCF4Njms2U",
+
+    authDomain:
+    "hafalan-8e6e4.firebaseapp.com",
+
+    projectId:
+    "hafalan-8e6e4",
+
+    storageBucket:
+    "hafalan-8e6e4.firebasestorage.app",
+
+    messagingSenderId:
+    "859030286938",
+
+    appId:
+    "1:859030286938:web:c42079d7780e253e589e63",
+
+    measurementId:
+    "G-QE2VL93VK3"
+
+};
+
+
+/* =====================================================
+   FIREBASE INIT
+===================================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+const siswaCollection =
+    collection(db,"siswa");
+
+
+/* =====================================================
+   MATERI HAFALAN
+===================================================== */
+
+const materi = {
+
+    /* ================= JUZ 30 ================= */
+
+    juz30:[
+
+        "An-Naba",
+        "An-Nazi'at",
+        "'Abasa",
+        "At-Takwir",
+        "Al-Infitar",
+        "Al-Mutaffifin",
+        "Al-Insyiqaq",
+        "Al-Buruj",
+        "At-Tariq",
+        "Al-A'la",
+        "Al-Ghasyiyah",
+        "Al-Fajr",
+        "Al-Balad",
+        "Asy-Syams",
+        "Al-Lail",
+        "Ad-Duha",
+        "Asy-Syarh",
+        "At-Tin",
+        "Al-'Alaq",
+        "Al-Qadr",
+        "Al-Bayyinah",
+        "Az-Zalzalah",
+        "Al-'Adiyat",
+        "Al-Qari'ah",
+        "At-Takatsur",
+        "Al-'Asr",
+        "Al-Humazah",
+        "Al-Fil",
+        "Quraisy",
+        "Al-Ma'un",
+        "Al-Kautsar",
+        "Al-Kafirun",
+        "An-Nasr",
+        "Al-Lahab",
+        "Al-Ikhlas",
+        "Al-Falaq",
+        "An-Nas"
+
+    ],
+
+
+    /* ================= AQIDAH ================= */
+
+    aqidah:[
+
+        "KISAH NABI MUHAMMAD SAW",
+
+        "SIFAT WAJIB BAGI ALLAH BESERTA ARTINYA",
+
+        "NADHOM SILSILAH NABI",
+
+        "SIFAT WAJIB BAGI ALLAH",
+
+        "NAMA-NAMA MALAIKAT DAN TUGASNYA",
+
+        "NAMA-NAMA ANAK NABI",
+
+        "NAMA-NAMA NABI & ROSUL",
+
+        "SIFAT MUSTAHIL BAGI ALLAH BESERTA ARTINYA",
+
+        "SIFAT WAJIB DAN MUSTAHIL BAGI ROSUL BESERTA ARTINYA"
+
+    ],
+
+
+    /* ================= DZIKIR ================= */
+
+    dzikiran:[
+
+        "DZIKIR BA'DA SHOLAT",
+
+        "AL-KAHFI 1-10",
+
+        "SURAT AT-THALAQ 2-3",
+
+        "AL-MANSUROT",
+
+        "TAWASSUL",
+
+        "DO'A"
+
+    ],
+
+
+    /* ================= AWAMIL ================= */
+
+    awamil:[
+
+        "MUQODDIMAH",
+
+        "AMIL LAFDZI SAMA’I - BAG.PERTAMA",
+
+        "AMIL LAFDZI SAMA’I - BAG.KEDUA",
+
+        "AMIL LAFDZI SAMA’I - BAG.KETIGA",
+
+        "AMIL LAFDZI SAMA’I - BAG.KEEMPAT",
+
+        "AMIL LAFDZI SAMA’I - BAG.KE LIMA",
+
+        "AMIL LAFDZI SAMA’I - BAG.KEENAM",
+
+        "AMIL LAFDZI SAMA’I - BAG.KETUJUH",
+
+        "AMIL LAFDZI SAMA’I - BAG.KEDELAPAN",
+
+        "AMIL LAFDZI SAMA’I - BAG.KESEMBILAN",
+
+        "AMIL LAFDZI SAMA’I - BAG.KESEPULUH",
+
+        "AMIL LAFDZI SAMA’I - BAG.KESEBELAS",
+
+        "AMIL LAFDZI SAMA’I - BAG.KEDUA BELAS",
+
+        "AMIL LAFDZI QIYASI",
+
+        "AMIL MA’NAWI",
+
+        "PENUTUP",
+
+        "NADHOM AWAMIL"
+
+    ],
+
+
+    /* ================= AMSILATI ================= */
+
+    amsilati:[
+
+        "JILID 1 - NO 1-11",
+
+        "JILID 1 - NO 12",
+
+        "JILID 1 - NO 13",
+
+        "JILID 1 - NO 16",
+
+        "JILID 1 - NO 20",
+
+        "JILID 1 - NO 21",
+
+        "JILID 1 - NO 30",
+
+        "JILID 1 - NO 32",
+
+        "JILID 1 - NO 34",
+
+        "JILID 1 - NO 43",
+
+        "JILID 1 - NO 47",
+
+        "JILID 1 - NO 48",
+
+        "JILID 1 - ISIM MAUSHUL",
+
+        "JILID 1 - ISIM ISYAROH",
+
+        "JILID 2 - NO 1",
+
+        "JILID 2 - NO 4",
+
+        "JILID 2 - NO 5",
+
+        "JILID 2 - NO 6",
+
+        "JILID 2 - NO 7",
+
+        "JILID 2 - NO 8",
+
+        "JILID 2 - NO 10",
+
+        "JILID 2 - NO 13",
+
+        "JILID 2 - NO 14",
+
+        "JILID 2 - NO 15",
+
+        "JILID 2 - NO 17",
+
+        "JILID 2 - NO 18",
+
+        "JILID 2 - NO 19",
+
+        "JILID 2 - NO 20",
+
+        "JILID 2 - NO 22",
+
+        "JILID 2 - NO 29"
+
+    ]
+
+};
+
+
+/* =====================================================
+   NAMA KATEGORI
+===================================================== */
+
+const namaMateri = {
+
+    juz30:"📖 JUZ 30",
+
+    aqidah:"🕌 AQIDAH",
+
+    dzikiran:"🤲 DZIKIR BA'DA SHOLAT",
+
+    awamil:"📚 AWAMIL",
+
+    amsilati:"📕 AMSILATI"
+
+};
+
+
+/* =====================================================
+   VARIABLE
+===================================================== */
+
+let siswaData = [];
+
+let siswaAktif = null;
+
+let kategoriAktif = null;
+
+let genderAktif = "putra";
+
+let statGenderAktif = "putra";
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+async function loadStudents(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                siswaCollection
+            );
+
+        siswaData = [];
+
+        snapshot.forEach(item => {
+
+            siswaData.push({
+
+                id:item.id,
+
+                ...item.data()
+
+            });
+
+        });
+
+
+        renderStudents();
+
+        renderStatistics();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Gagal mengambil data"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   NAVIGASI
+===================================================== */
+
+function hidePages(){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(page => {
+
+        page.classList.remove(
+            "active"
+        );
+
+    });
+
+}
+
+
+window.showHome = function(){
+
+    hidePages();
+
+    document
+    .getElementById("homePage")
+    .classList.add("active");
+
+
+    document
+    .getElementById("navSiswa")
+    .classList.add("active");
+
+
+    document
+    .getElementById("navStatistik")
+    .classList.remove("active");
+
+
+    renderStudents();
+
+};
+
+
+window.showStatistics = function(){
+
+    hidePages();
+
+    document
+    .getElementById("statisticsPage")
+    .classList.add("active");
+
+
+    document
+    .getElementById("navStatistik")
+    .classList.add("active");
+
+
+    document
+    .getElementById("navSiswa")
+    .classList.remove("active");
+
+
+    renderStatistics();
+
+};
+
+
+window.showStudent = function(){
+
+    hidePages();
+
+    document
+    .getElementById("studentPage")
+    .classList.add("active");
+
+};
+
+
+/* =====================================================
+   PUTRA / PUTRI
+===================================================== */
+
+window.setGender = function(gender){
+
+    genderAktif =
+        gender;
+
+
+    document
+    .getElementById("putraTab")
+    .classList.toggle(
+        "active",
+        gender === "putra"
+    );
+
+
+    document
+    .getElementById("putriTab")
+    .classList.toggle(
+        "active",
+        gender === "putri"
+    );
+
+
+    renderStudents();
+
+};
+
+
+/* =====================================================
+   RENDER SISWA
+===================================================== */
+
+window.renderStudents = function(){
+
+    const container =
+        document.getElementById(
+            "studentList"
+        );
+
+
+    const input =
+        document.getElementById(
+            "searchInput"
+        );
+
+
+    const keyword =
+        input
+        ? input.value
+            .toLowerCase()
+        : "";
+
+
+    const hasil =
+        siswaData.filter(siswa => {
+
+            const gender =
+                siswa.gender ||
+                "putra";
+
+
+            return (
+
+                gender === genderAktif &&
+
+                (siswa.nama || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            );
+
+        });
+
+
+    container.innerHTML = "";
+
+
+    if(hasil.length === 0){
+
+        container.innerHTML = `
+
+            <div class="card empty">
+
+                👤
+
+                <br><br>
+
+                Belum ada data siswa
+                ${
+                    genderAktif === "putra"
+                    ? "putra"
+                    : "putri"
+                }.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    hasil.forEach(siswa => {
+
+        const progress =
+            getProgress(siswa);
+
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "student";
+
+
+        card.innerHTML = `
+
+            <div class="student-header">
+
+                <div>
+
+                    <div class="student-name">
+
+                        👤
+                        ${escapeHTML(
+                            siswa.nama
+                        )}
+
+                    </div>
+
+                    <div class="student-class">
+
+                        Kelas
+                        ${escapeHTML(
+                            siswa.kelas || "-"
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="gender-badge
+                    ${
+                        siswa.gender === "putri"
+                        ? "putri"
+                        : "putra"
+                    }">
+
+                    ${
+                        siswa.gender === "putri"
+                        ? "PUTRI"
+                        : "PUTRA"
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    style="width:
+                    ${progress.percent}%">
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-text">
+
+                ${progress.hafal}
+                /
+                ${progress.total}
+                materi •
+                ${progress.percent}%
+
+            </div>
+
+
+            <div class="student-actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="openStudent('${siswa.id}')">
+
+                    📚 Buka
+
+                </button>
+
+
+                <button
+                    class="btn btn-warning"
+                    onclick="editStudent('${siswa.id}')">
+
+                    ✏️
+
+                </button>
+
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteStudent('${siswa.id}')">
+
+                    🗑️
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+};
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+function getProgress(siswa){
+
+    let total = 0;
+
+    let hafal = 0;
+
+
+    Object.keys(materi)
+    .forEach(kategori => {
+
+        total +=
+            materi[kategori].length;
+
+
+        const data =
+            siswa.hafalan?.[kategori]
+            || {};
+
+
+        materi[kategori]
+        .forEach((_,index) => {
+
+            if(data[index] === true){
+
+                hafal++;
+
+            }
+
+        });
+
+    });
+
+
+    return {
+
+        total:total,
+
+        hafal:hafal,
+
+        percent:
+            total
+            ? Math.round(
+                (hafal / total) * 100
+            )
+            : 0
+
+    };
+
+}
+
+
+/* =====================================================
+   TAMBAH SISWA
+===================================================== */
+
+window.openAddStudent = function(){
+
+    document
+    .getElementById(
+        "studentNameInput"
+    ).value = "";
+
+
+    document
+    .getElementById(
+        "studentClassInput"
+    ).value = "";
+
+
+    document
+    .getElementById(
+        "studentGenderInput"
+    ).value =
+        genderAktif;
+
+
+    document
+    .getElementById(
+        "studentModal"
+    )
+    .classList.add("show");
+
+};
+
+
+window.closeAddStudent = function(){
+
+    document
+    .getElementById(
+        "studentModal"
+    )
+    .classList.remove("show");
+
+};
+
+
+window.saveStudent = async function(){
+
+    const nama =
+        document
+        .getElementById(
+            "studentNameInput"
+        )
+        .value
+        .trim();
+
+
+    const kelas =
+        document
+        .getElementById(
+            "studentClassInput"
+        )
+        .value
+        .trim();
+
+
+    const gender =
+        document
+        .getElementById(
+            "studentGenderInput"
+        )
+        .value;
+
+
+    if(!nama){
+
+        alert(
+            "Nama siswa wajib diisi!"
+        );
+
+        return;
+
+    }
+
+
+    if(!kelas){
+
+        alert(
+            "Kelas wajib diisi!"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await addDoc(
+
+            siswaCollection,
+
+            {
+
+                nama:nama,
+
+                kelas:kelas,
+
+                gender:gender,
+
+                hafalan:{},
+
+                createdAt:
+                    serverTimestamp(),
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        closeAddStudent();
+
+        await loadStudents();
+
+        setGender(gender);
+
+
+        showToast(
+            "✅ Siswa berhasil ditambahkan"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Gagal menambahkan siswa"
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   BUKA SISWA
+===================================================== */
+
+window.openStudent = function(id){
+
+    const siswa =
+        siswaData.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!siswa){
+
+        return;
+
+    }
+
+
+    siswaAktif =
+        siswa;
+
+
+    document
+    .getElementById(
+        "detailName"
+    )
+    .textContent =
+        "👤 " + siswa.nama;
+
+
+    document
+    .getElementById(
+        "detailClass"
+    )
+    .textContent =
+        "Kelas " +
+        (siswa.kelas || "-");
+
+
+    const genderElement =
+        document
+        .getElementById(
+            "detailGender"
+        );
+
+
+    if(siswa.gender === "putri"){
+
+        genderElement.textContent =
+            "PUTRI";
+
+        genderElement.className =
+            "gender-badge putri";
+
+    }
+    else{
+
+        genderElement.textContent =
+            "PUTRA";
+
+        genderElement.className =
+            "gender-badge putra";
+
+    }
+
+
+    updateDetail();
+
+
+    hidePages();
+
+    document
+    .getElementById(
+        "studentPage"
+    )
+    .classList.add("active");
+
+};
+
+
+/* =====================================================
+   DETAIL PROGRESS
+===================================================== */
+
+function updateDetail(){
+
+    if(!siswaAktif){
+
+        return;
+
+    }
+
+
+    const progress =
+        getProgress(
+            siswaAktif
+        );
+
+
+    document
+    .getElementById(
+        "detailProgressBar"
+    )
+    .style.width =
+        progress.percent + "%";
+
+
+    document
+    .getElementById(
+        "detailProgressText"
+    )
+    .textContent =
+        `${progress.hafal}/${progress.total} materi • ${progress.percent}%`;
+
+}
+
+
+/* =====================================================
+   OPEN CATEGORY
+===================================================== */
+
+window.openCategory = function(kategori){
+
+    if(!siswaAktif){
+
+        return;
+
+    }
+
+
+    kategoriAktif =
+        kategori;
+
+
+    document
+    .getElementById(
+        "materialTitle"
+    )
+    .textContent =
+        namaMateri[kategori];
+
+
+    document
+    .getElementById(
+        "materialSubtitle"
+    )
+    .textContent =
+        "Hafalan " +
+        siswaAktif.nama;
+
+
+    renderMaterials();
+
+
+    hidePages();
+
+    document
+    .getElementById(
+        "materialPage"
+    )
+    .classList.add("active");
+
+};
+
+
+/* =====================================================
+   RENDER CHECKLIST
+===================================================== */
+
+function renderMaterials(){
+
+    const list =
+        document
+        .getElementById(
+            "materialList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    const daftar =
+        materi[kategoriAktif];
+
+
+    const data =
+        siswaAktif
+        .hafalan?.[kategoriAktif]
+        || {};
+
+
+    let jumlahHafal = 0;
+
+
+    daftar.forEach(
+        (nama,index) => {
+
+            const checked =
+                data[index] === true;
+
+
+            if(checked){
+
+                jumlahHafal++;
+
+            }
+
+
+            const item =
+                document.createElement(
+                    "label"
+                );
+
+
+            item.className =
+                "material-item" +
+                (
+                    checked
+                    ? " done"
+                    : ""
+                );
+
+
+            item.innerHTML = `
+
+                <input
+                    type="checkbox"
+                    ${checked
+                        ? "checked"
+                        : ""}>
+
+                <div class="material-name">
+
+                    ${escapeHTML(nama)}
+
+                </div>
+
+                <div class="material-status">
+
+                    ${
+                        checked
+                        ? "✓ Sudah Hafal"
+                        : "Belum Hafal"
+                    }
+
+                </div>
+
+            `;
+
+
+            const checkbox =
+                item.querySelector(
+                    "input"
+                );
+
+
+            checkbox.addEventListener(
+                "change",
+                function(){
+
+                    saveChecklist(
+                        index,
+                        checkbox.checked
+                    );
+
+                }
+            );
+
+
+            list.appendChild(item);
+
+        }
+    );
+
+
+    const total =
+        daftar.length;
+
+
+    const percent =
+        total
+        ? Math.round(
+            (jumlahHafal / total) * 100
+        )
+        : 0;
+
+
+    document
+    .getElementById(
+        "materialProgressBar"
+    )
+    .style.width =
+        percent + "%";
+
+
+    document
+    .getElementById(
+        "materialProgressText"
+    )
+    .textContent =
+        `${jumlahHafal}/${total} hafal • ${percent}%`;
+
+}
+
+
+/* =====================================================
+   SIMPAN CHECKLIST
+===================================================== */
+
+async function saveChecklist(
+    index,
+    value
+){
+
+    if(!siswaAktif){
+
+        return;
+
+    }
+
+
+    try{
+
+        const siswaRef =
+            doc(
+                db,
+                "siswa",
+                siswaAktif.id
+            );
+
+
+        const hafalan =
+            siswaAktif.hafalan
+            || {};
+
+
+        if(
+            !hafalan[kategoriAktif]
+        ){
+
+            hafalan[kategoriAktif] =
+                {};
+
+        }
+
+
+        hafalan[kategoriAktif][index] =
+            value;
+
+
+        await updateDoc(
+
+            siswaRef,
+
+            {
+
+                hafalan:hafalan,
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        siswaAktif.hafalan =
+            hafalan;
+
+
+        const indexSiswa =
+            siswaData.findIndex(
+                siswa =>
+                    siswa.id ===
+                    siswaAktif.id
+            );
+
+
+        if(indexSiswa !== -1){
+
+            siswaData[indexSiswa] =
+                siswaAktif;
+
+        }
+
+
+        renderMaterials();
+
+        updateDetail();
+
+        renderStudents();
+
+        renderStatistics();
+
+
+        showToast(
+            value
+            ? "✅ Setoran disimpan"
+            : "↩️ Setoran dibatalkan"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Gagal menyimpan"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   EDIT SISWA
+===================================================== */
+
+window.editStudent = async function(id){
+
+    const siswa =
+        siswaData.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!siswa){
+
+        return;
+
+    }
+
+
+    const nama =
+        prompt(
+            "Nama siswa:",
+            siswa.nama
+        );
+
+
+    if(nama === null){
+
+        return;
+
+    }
+
+
+    const kelas =
+        prompt(
+            "Kelas:",
+            siswa.kelas || ""
+        );
+
+
+    if(kelas === null){
+
+        return;
+
+    }
+
+
+    try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "siswa",
+                id
+            ),
+
+            {
+
+                nama:
+                    nama.trim(),
+
+                kelas:
+                    kelas.trim(),
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        await loadStudents();
+
+
+        if(
+            siswaAktif &&
+            siswaAktif.id === id
+        ){
+
+            siswaAktif =
+                siswaData.find(
+                    siswa =>
+                        siswa.id === id
+                );
+
+        }
+
+
+        showToast(
+            "✅ Data diperbarui"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Gagal memperbarui"
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   HAPUS SISWA
+===================================================== */
+
+window.deleteStudent = async function(id){
+
+    const siswa =
+        siswaData.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!siswa){
+
+        return;
+
+    }
+
+
+    const yakin =
+        confirm(
+            `Hapus ${siswa.nama} beserta seluruh hafalannya?`
+        );
+
+
+    if(!yakin){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "siswa",
+                id
+            )
+
+        );
+
+
+        if(
+            siswaAktif &&
+            siswaAktif.id === id
+        ){
+
+            siswaAktif = null;
+
+        }
+
+
+        await loadStudents();
+
+
+        showToast(
+            "🗑️ Siswa berhasil dihapus"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Gagal menghapus"
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   STATISTIK PUTRA / PUTRI
+===================================================== */
+
+window.setStatGender = function(gender){
+
+    statGenderAktif =
+        gender;
+
+
+    document
+    .getElementById(
+        "statPutra"
+    )
+    .classList.toggle(
+        "active",
+        gender === "putra"
+    );
+
+
+    document
+    .getElementById(
+        "statPutri"
+    )
+    .classList.toggle(
+        "active",
+        gender === "putri"
+    );
+
+
+    renderStatistics();
+
+};
+
+
+/* =====================================================
+   RENDER STATISTIK
+===================================================== */
+
+window.renderStatistics = function(){
+
+    const select =
+        document
+        .getElementById(
+            "statCategory"
+        );
+
+
+    if(!select){
+
+        return;
+
+    }
+
+
+    const kategori =
+        select.value;
+
+
+    const daftarSiswa =
+        siswaData.filter(
+            siswa =>
+                (
+                    siswa.gender ||
+                    "putra"
+                )
+                === statGenderAktif
+        );
+
+
+    const ranking = [];
+
+
+    daftarSiswa.forEach(
+        siswa => {
+
+            const data =
+                siswa
+                .hafalan?.[kategori]
+                || {};
+
+
+            let jumlah = 0;
+
+
+            materi[kategori]
+            .forEach(
+                (_,index) => {
+
+                    if(
+                        data[index] === true
+                    ){
+
+                        jumlah++;
+
+                    }
+
+                }
+            );
+
+
+            ranking.push({
+
+                nama:
+                    siswa.nama,
+
+                jumlah:
+                    jumlah
+
+            });
+
+        }
+    );
+
+
+    ranking.sort(
+        (a,b) =>
+            b.jumlah - a.jumlah
+    );
+
+
+    const totalSetoran =
+        ranking.reduce(
+            (total,item) =>
+                total + item.jumlah,
+            0
+        );
+
+
+    const terbanyak =
+        ranking.length
+        ? ranking[0].jumlah
+        : 0;
+
+
+    document
+    .getElementById(
+        "statJumlahSiswa"
+    )
+    .textContent =
+        ranking.length;
+
+
+    document
+    .getElementById(
+        "statTotalSetoran"
+    )
+    .textContent =
+        totalSetoran;
+
+
+    document
+    .getElementById(
+        "statTerbanyak"
+    )
+    .textContent =
+        terbanyak;
+
+
+    document
+    .getElementById(
+        "rankingTitle"
+    )
+    .textContent =
+        statGenderAktif === "putra"
+        ? "🏆 Ranking Putra"
+        : "🏆 Ranking Putri";
+
+
+    const container =
+        document
+        .getElementById(
+            "rankingList"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if(ranking.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                Belum ada data siswa.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const max =
+        Math.max(
+            ...ranking.map(
+                item =>
+                    item.jumlah
+            ),
+            1
+        );
+
+
+    ranking.forEach(
+        (item,index) => {
+
+            const persen =
+                Math.round(
+                    (
+                        item.jumlah /
+                        max
+                    ) * 100
+                );
+
+
+            let medal;
+
+
+            if(index === 0){
+
+                medal = "🥇";
+
+            }
+            else if(index === 1){
+
+                medal = "🥈";
+
+            }
+            else if(index === 2){
+
+                medal = "🥉";
+
+            }
+            else{
+
+                medal =
+                    `${index + 1}.`;
+
+            }
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "chart-row";
+
+
+            row.innerHTML = `
+
+                <div class="chart-header">
+
+                    <div class="chart-name">
+
+                        ${medal}
+                        ${escapeHTML(
+                            item.nama
+                        )}
+
+                    </div>
+
+
+                    <div class="chart-value">
+
+                        ${item.jumlah}
+                        /
+                        ${materi[kategori].length}
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-background">
+
+                    <div
+                        class="chart-bar"
+                        style="width:${persen}%">
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-text">
+
+                    ${item.jumlah}
+                    dari
+                    ${materi[kategori].length}
+                    materi sudah hafal
+
+                </div>
+
+            `;
+
+
+            container.appendChild(row);
+
+        }
+    );
+
+};
+
+
+/* =====================================================
+   TOAST
+===================================================== */
 
 function showToast(message){
 
-const toast=
-document.getElementById("toast");
+    const toast =
+        document.getElementById(
+            "toast"
+        );
 
 
-toast.textContent=
-message;
+    toast.textContent =
+        message;
 
 
-toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
 
-setTimeout(()=>{
+    setTimeout(
+        () => {
 
-toast.classList.remove("show");
+            toast.classList.remove(
+                "show"
+            );
 
-},2500);
+        },
+        2500
+    );
 
 }
 
 
-
-/* SECURITY */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
 function escapeHTML(text){
 
-return String(text)
+    return String(text)
 
-.replace(/&/g,"&amp;")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-.replace(/</g,"&lt;")
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-.replace(/>/g,"&gt;")
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-.replace(/"/g,"&quot;")
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-.replace(/'/g,"&#039;");
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
-
-/* START */
+/* =====================================================
+   START
+===================================================== */
 
 loadStudents();
 
