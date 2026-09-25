@@ -673,6 +673,12 @@ MOBILE
 
 }
 
+
+.surah-list{display:flex;flex-direction:column;gap:10px}
+.surah-item{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#12243a;border:1px solid #243b53;color:white;padding:15px;border-radius:14px;text-align:left}
+.surah-item:hover{border-color:#38bdf8}
+.surah-number{min-width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#1d4ed8;font-weight:bold}
+.surah-name{flex:1;font-weight:bold}.surah-count{color:#94a3b8;font-size:12px}
 </style>
 </head>
 
@@ -1067,6 +1073,31 @@ class="material-list">
 </section>
 
 
+
+<!-- ==================================================
+NON JUZ 30 - DAFTAR SURAT
+================================================== -->
+<section id="pageNonJuz30" class="hidden">
+<button class="btn secondary" onclick="backToStudentFromNonJuz()">← Kembali</button>
+<div class="card" style="margin-top:15px">
+<h2>📖 Non Juz 30</h2>
+<p id="nonJuz30Student" class="muted"></p>
+<p class="muted" style="margin-top:8px">Pilih surat untuk melihat dan mencentang ayat satu per satu.</p>
+<div id="surahList" class="surah-list" style="margin-top:18px"></div>
+</div></section>
+
+<!-- ==================================================
+NON JUZ 30 - AYAT
+================================================== -->
+<section id="pageNonJuzAyat" class="hidden">
+<button class="btn secondary" onclick="backToSurahList()">← Kembali ke Daftar Surat</button>
+<div class="card" style="margin-top:15px">
+<h2 id="nonJuzAyatTitle">Surat</h2>
+<p id="nonJuzAyatStudent" class="muted"></p>
+<div class="progress-bg"><div id="nonJuzAyatProgress" class="progress-bar" style="width:0%"></div></div>
+<div id="nonJuzAyatProgressText" class="progress-text" style="margin-bottom:20px"></div>
+<div id="ayatList" class="material-list"></div>
+</div></section>
 
 <!-- ==================================================
 STATISTIK
@@ -1681,6 +1712,12 @@ tasrif:[
 };
 
 
+
+const nonJuz30Surah=[
+{no:1,name:"Al-Fatihah",ayat:7},{no:2,name:"Al-Baqarah",ayat:286},{no:3,name:"Ali 'Imran",ayat:200},{no:4,name:"An-Nisa",ayat:176},{no:5,name:"Al-Ma'idah",ayat:120},{no:6,name:"Al-An'am",ayat:165},{no:7,name:"Al-A'raf",ayat:206},{no:8,name:"Al-Anfal",ayat:75},{no:9,name:"At-Taubah",ayat:129},{no:10,name:"Yunus",ayat:109},{no:11,name:"Hud",ayat:123},{no:12,name:"Yusuf",ayat:111},{no:13,name:"Ar-Ra'd",ayat:43},{no:14,name:"Ibrahim",ayat:52},{no:15,name:"Al-Hijr",ayat:99},{no:16,name:"An-Nahl",ayat:128},{no:17,name:"Al-Isra",ayat:111},{no:18,name:"Al-Kahf",ayat:110},{no:19,name:"Maryam",ayat:98},{no:20,name:"Taha",ayat:135},{no:21,name:"Al-Anbiya",ayat:112},{no:22,name:"Al-Hajj",ayat:78},{no:23,name:"Al-Mu'minun",ayat:118},{no:24,name:"An-Nur",ayat:64},{no:25,name:"Al-Furqan",ayat:77},{no:26,name:"Asy-Syu'ara",ayat:227},{no:27,name:"An-Naml",ayat:93},{no:28,name:"Al-Qasas",ayat:88},{no:29,name:"Al-Ankabut",ayat:69},{no:30,name:"Ar-Rum",ayat:60},{no:31,name:"Luqman",ayat:34},{no:32,name:"As-Sajdah",ayat:30},{no:33,name:"Al-Ahzab",ayat:73},{no:34,name:"Saba",ayat:54},{no:35,name:"Fatir",ayat:45},{no:36,name:"Yasin",ayat:83},{no:37,name:"As-Saffat",ayat:182},{no:38,name:"Sad",ayat:88},{no:39,name:"Az-Zumar",ayat:75},{no:40,name:"Ghafir",ayat:85},{no:41,name:"Fussilat",ayat:54},{no:42,name:"Asy-Syura",ayat:53},{no:43,name:"Az-Zukhruf",ayat:89},{no:44,name:"Ad-Dukhan",ayat:59},{no:45,name:"Al-Jasiyah",ayat:37},{no:46,name:"Al-Ahqaf",ayat:35},{no:47,name:"Muhammad",ayat:38},{no:48,name:"Al-Fath",ayat:29},{no:49,name:"Al-Hujurat",ayat:18},{no:50,name:"Qaf",ayat:45},{no:51,name:"Az-Zariyat",ayat:60},{no:52,name:"At-Tur",ayat:49},{no:53,name:"An-Najm",ayat:62},{no:54,name:"Al-Qamar",ayat:55},{no:55,name:"Ar-Rahman",ayat:78},{no:56,name:"Al-Waqi'ah",ayat:96},{no:57,name:"Al-Hadid",ayat:29},{no:58,name:"Al-Mujadilah",ayat:22},{no:59,name:"Al-Hasyr",ayat:24},{no:60,name:"Al-Mumtahanah",ayat:13},{no:61,name:"As-Saff",ayat:14},{no:62,name:"Al-Jumu'ah",ayat:11},{no:63,name:"Al-Munafiqun",ayat:11},{no:64,name:"At-Tagabun",ayat:18},{no:65,name:"At-Talaq",ayat:12},{no:66,name:"At-Tahrim",ayat:12},{no:67,name:"Al-Mulk",ayat:30},{no:68,name:"Al-Qalam",ayat:52},{no:69,name:"Al-Haqqah",ayat:52},{no:70,name:"Al-Ma'arij",ayat:44},{no:71,name:"Nuh",ayat:28},{no:72,name:"Al-Jinn",ayat:28},{no:73,name:"Al-Muzzammil",ayat:20},{no:74,name:"Al-Muddassir",ayat:56},{no:75,name:"Al-Qiyamah",ayat:40},{no:76,name:"Al-Insan",ayat:31},{no:77,name:"Al-Mursalat",ayat:50}
+];
+function totalNonJuz30Ayat(){return nonJuz30Surah.reduce((sum,surat)=>sum+surat.ayat,0)}
+
 const namaKategori={
 
 juz30:"📖 JUZ 30",
@@ -1693,7 +1730,8 @@ awamil:"📚 AWAMIL",
 
 amsilati:"📕 AMSILATI",
 
-tasrif:"🕌 TASRIF"
+tasrif:"🕌 TASRIF",
+nonJuz30:"📖 NON JUZ 30"
 
 };
 
@@ -1710,7 +1748,8 @@ awamil:"📚",
 
 amsilati:"📕",
 
-tasrif:"🕌"
+tasrif:"🕌",
+nonJuz30:"📖"
 
 };
 
@@ -1730,6 +1769,7 @@ let kategoriAktif=null;
 let editId=null;
 
 let statGender="putra";
+let suratAktif=null;
 
 
 /* ==================================================
@@ -1868,6 +1908,9 @@ document
 .getElementById("pageSettings")
 .classList.add("hidden");
 
+document.getElementById("pageNonJuz30").classList.add("hidden");
+document.getElementById("pageNonJuzAyat").classList.add("hidden");
+
 
 document
 .getElementById("navData")
@@ -2004,55 +2047,15 @@ PROGRESS
 ================================================== */
 
 function getProgress(student){
-
-let total=0;
-
-let selesai=0;
-
-
-for(
-const kategori in materi
-){
-
-total+=
-materi[kategori].length;
-
-
-const data=
-student.hafalan?.[kategori] || {};
-
-
-materi[kategori].forEach(
-(_,index)=>{
-
-if(data[index]===true){
-
-selesai++;
-
+let total=0, selesai=0;
+for(const kategori in materi){
+total+=materi[kategori].length;
+const data=student.hafalan?.[kategori]||{};
+materi[kategori].forEach((_,index)=>{if(data[index]===true) selesai++});
 }
-
-}
-);
-
-}
-
-
-return{
-
-total,
-
-selesai,
-
-persen:
-total
-?
-Math.round(
-selesai/total*100
-)
-:0
-
-};
-
+const dataNon=student.hafalan?.nonJuz30||{};
+nonJuz30Surah.forEach(surat=>{for(let ayat=1;ayat<=surat.ayat;ayat++){total++;if(dataNon[surat.no]?.[ayat]===true) selesai++}});
+return {total,selesai,persen:total?Math.round(selesai/total*100):0};
 }
 
 
@@ -2625,53 +2628,51 @@ CATEGORY
 ================================================== */
 
 function renderCategories(){
-
-const grid=
-document
-.getElementById("categoryGrid");
-
-
-grid.innerHTML=
-Object.keys(materi)
-.map(
-key=>`
-
-<button
-class="category"
-onclick="
-openCategory('${key}')
-">
-
-<div class="category-icon">
-
-${iconKategori[key]}
-
-</div>
-
-<h3>
-
-${namaKategori[key].replace(
-/^[^ ]+ /,
-""
-)}
-
-</h3>
-
-<p>
-
-${materi[key].length}
-materi
-
-</p>
-
-</button>
-
-`
-)
-.join("");
-
+const grid=document.getElementById("categoryGrid");
+const normal=Object.keys(materi).map(key=>`<button class="category" onclick="openCategory('${key}')"><div class="category-icon">${iconKategori[key]}</div><h3>${namaKategori[key].replace(/^[^ ]+ /,"")}</h3><p>${materi[key].length} materi</p></button>`).join("");
+const non=`<button class="category" onclick="openNonJuz30()"><div class="category-icon">📖</div><h3>NON JUZ 30</h3><p>${nonJuz30Surah.length} surat</p></button>`;
+grid.innerHTML=normal+non;
 }
 
+
+/* ==================================================
+NON JUZ 30
+================================================== */
+window.openNonJuz30=function(){
+if(!siswaAktif)return;
+document.getElementById("pageStudent").classList.add("hidden");
+document.getElementById("pageMaterial").classList.add("hidden");
+document.getElementById("pageNonJuzAyat").classList.add("hidden");
+document.getElementById("pageNonJuz30").classList.remove("hidden");
+document.getElementById("nonJuz30Student").textContent=siswaAktif.nama;
+renderNonJuz30List();
+};
+function renderNonJuz30List(){
+const list=document.getElementById("surahList");
+list.innerHTML=nonJuz30Surah.map(surat=>`<button class="surah-item" onclick="openNonJuzSurah(${surat.no})"><span class="surah-number">${surat.no}</span><span class="surah-name">${escapeHTML(surat.name)}</span><span class="surah-count">${surat.ayat} ayat →</span></button>`).join("");
+}
+window.openNonJuzSurah=function(no){
+const surat=nonJuz30Surah.find(x=>x.no===no); if(!surat||!siswaAktif)return; suratAktif=surat;
+document.getElementById("pageNonJuz30").classList.add("hidden");
+document.getElementById("pageNonJuzAyat").classList.remove("hidden");
+renderNonJuzAyat();
+};
+function renderNonJuzAyat(){
+if(!suratAktif||!siswaAktif)return;
+const data=siswaAktif.hafalan?.nonJuz30?.[suratAktif.no]||{}; let selesai=0;
+for(let ayat=1;ayat<=suratAktif.ayat;ayat++)if(data[ayat]===true)selesai++;
+const persen=suratAktif.ayat?Math.round(selesai/suratAktif.ayat*100):0;
+document.getElementById("nonJuzAyatTitle").textContent=`📖 ${suratAktif.name}`;
+document.getElementById("nonJuzAyatStudent").textContent=siswaAktif.nama;
+document.getElementById("nonJuzAyatProgress").style.width=persen+"%";
+document.getElementById("nonJuzAyatProgressText").textContent=`${selesai}/${suratAktif.ayat} ayat hafal • ${persen}%`;
+document.getElementById("ayatList").innerHTML=Array.from({length:suratAktif.ayat},(_,i)=>i+1).map(ayat=>{const done=data[ayat]===true;return `<label class="material ${done?"done":""}"><input type="checkbox" ${done?"checked":""} onchange="toggleNonJuzAyat(${suratAktif.no},${ayat},this.checked)"><span class="material-name">Ayat ${ayat}</span><span class="material-status">${done?"✓ HAFAL":"Belum"}</span></label>`}).join("");
+}
+window.toggleNonJuzAyat=async function(surahNo,ayat,value){
+if(!siswaAktif)return;
+try{const hafalan=JSON.parse(JSON.stringify(siswaAktif.hafalan||{}));if(!hafalan.nonJuz30)hafalan.nonJuz30={};if(!hafalan.nonJuz30[surahNo])hafalan.nonJuz30[surahNo]={};hafalan.nonJuz30[surahNo][ayat]=value;await updateDoc(doc(db,"siswa",siswaAktif.id),{hafalan,updatedAt:serverTimestamp()});siswaAktif.hafalan=hafalan;const i=siswa.findIndex(x=>x.id===siswaAktif.id);if(i!==-1)siswa[i].hafalan=hafalan;renderNonJuzAyat();renderStudentDetail();renderStudents();renderStats();showToast(value?"✅ Ayat disimpan":"↩️ Ayat dibatalkan");}catch(error){console.error(error);showToast("❌ Gagal menyimpan ayat")}};
+window.backToStudentFromNonJuz=function(){document.getElementById("pageNonJuz30").classList.add("hidden");document.getElementById("pageNonJuzAyat").classList.add("hidden");document.getElementById("pageStudent").classList.remove("hidden");renderStudentDetail()};
+window.backToSurahList=function(){document.getElementById("pageNonJuzAyat").classList.add("hidden");document.getElementById("pageNonJuz30").classList.remove("hidden");renderNonJuz30List()};
 
 /* ==================================================
 OPEN CATEGORY
@@ -2978,20 +2979,7 @@ document
 .getElementById("statCategory");
 
 
-statCategory.innerHTML=
-Object.keys(materi)
-.map(
-key=>`
-
-<option value="${key}">
-
-${namaKategori[key]}
-
-</option>
-
-`
-)
-.join("");
+statCategory.innerHTML=Object.keys(materi).map(key=>`<option value="${key}">${namaKategori[key]}</option>`).join("")+`<option value="nonJuz30">📖 NON JUZ 30 (AYAT)</option>`;
 
 
 statCategory
@@ -3055,30 +3043,14 @@ const ranking=
 data.map(
 student=>{
 
-const hafalan=
-student
-.hafalan?.[kategori]
-||
-{};
-
-
-let selesai=0;
-
-
-materi[kategori]
-.forEach(
-(_,index)=>{
-
-if(
-hafalan[index]===true
-){
-
-selesai++;
-
+let selesai=0,total=0;
+if(kategori==="nonJuz30"){
+const hafalan=student.hafalan?.nonJuz30||{};
+nonJuz30Surah.forEach(surat=>{for(let ayat=1;ayat<=surat.ayat;ayat++){total++;if(hafalan[surat.no]?.[ayat]===true)selesai++}});
+}else{
+const hafalan=student.hafalan?.[kategori]||{};
+materi[kategori].forEach((_,index)=>{total++;if(hafalan[index]===true)selesai++});
 }
-
-}
-);
 
 
 return{
@@ -3088,8 +3060,7 @@ student.nama,
 
 selesai,
 
-total:
-materi[kategori].length
+total
 
 };
 
