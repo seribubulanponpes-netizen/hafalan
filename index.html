@@ -1689,16 +1689,202 @@ let parentSiswaAktif=null;
 /* ==================================================
 PORTAL ORANG TUA
 ================================================== */
-window.openAdminLogin=function(){document.getElementById("entryChoice").classList.add("hidden");document.getElementById("adminLoginBox").classList.remove("hidden")};
-window.backToEntryChoice=function(){document.getElementById("parentPortal").classList.add("hidden");document.getElementById("parentDetail").classList.add("hidden");document.getElementById("app").style.display="none";document.getElementById("entryChoice").classList.remove("hidden");document.getElementById("adminLoginBox").classList.add("hidden");document.getElementById("loginPage").style.display="flex"};
-window.openParentPortal=async function(){document.getElementById("loginPage").style.display="none";document.getElementById("parentPortal").classList.remove("hidden");document.getElementById("parentDetail").classList.add("hidden");document.getElementById("parentSearch").value="";const list=document.getElementById("parentStudentList");list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center">⏳ Memuat data santri...</div>';try{const snapshot=await getDocs(siswaRef);siswa=snapshot.docs.map(item=>({id:item.id,...item.data()}));renderParentStudents()}catch(error){console.error(error);list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center;color:#f87171">❌ Gagal mengambil data. Periksa koneksi internet.</div>'}};
-function parentProgressText(student,key){if(key==="nonJuz30"){const data=student.hafalan?.nonJuz30||{};let total=totalNonJuz30Ayat(),done=0;nonJuz30Surah.forEach(s=>{for(let a=1;a<=s.ayat;a++)if(data[s.no]?.[a]===true)done++});return{done,total,percent:total?Math.round(done/total*100):0}}const total=materi[key]?.length||0,data=student.hafalan?.[key]||{};let done=0;for(let i=0;i<total;i++)if(data[i]===true)done++;return{done,total,percent:total?Math.round(done/total*100):0}}
-window.renderParentStudents=function(){const search=(document.getElementById("parentSearch")?.value||"").toLowerCase();const data=siswa.filter(x=>(x.nama||"").toLowerCase().includes(search));const list=document.getElementById("parentStudentList");if(!data.length){list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center"><div style="font-size:38px">👤</div><p class="muted">Nama anak tidak ditemukan.</p></div>';return}list.innerHTML=data.map(student=>{const p=getProgress(student);return`<button class="parent-student" onclick="openParentStudent('${student.id}')"><div class="parent-student-name">👤 ${escapeHTML(student.nama||"Tanpa Nama")}</div><div class="parent-student-meta">Kelas ${escapeHTML(student.kelas||"-")} • ${p.selesai}/${p.total} hafalan</div><div class="parent-mini-progress"><div class="parent-mini-fill" style="width:${p.persen}%"></div></div><div class="parent-percent">${p.persen}% selesai</div></button>`}).join("")};
-window.openParentStudent=function(id){const student=siswa.find(x=>x.id===id);if(!student)return;parentSiswaAktif=student;document.getElementById("parentPortal").classList.add("hidden");document.getElementById("parentDetail").classList.remove("hidden");renderParentDetail()};
-function renderParentDetail(){if(!parentSiswaAktif)return;const p=getProgress(parentSiswaAktif);document.getElementById("parentDetailName").textContent="👤 "+(parentSiswaAktif.nama||"Tanpa Nama");document.getElementById("parentDetailClass").textContent="Kelas "+(parentSiswaAktif.kelas||"-");document.getElementById("parentDetailProgress").style.width=p.persen+"%";document.getElementById("parentDetailProgressText").textContent=`${p.selesai}/${p.total} hafalan selesai • ${p.persen}%`;const keys=["juz30","aqidah","dzikir","awamil","amsilati","tasrif","nonJuz30"];document.getElementById("parentCategoryGrid").innerHTML=keys.map(key=>{const q=parentProgressText(parentSiswaAktif,key);const title=key==="nonJuz30"?"📖 NON JUZ 30":namaKategori[key];return`<button type="button" class="parent-category" onclick="openParentMaterialDetail(\'${key}\')"><h3>${escapeHTML(title)}</h3><p>${q.done}/${q.total} selesai • ${q.percent}%</p><div class="parent-mini-progress"><div class="parent-mini-fill" style="width:${q.percent}%"></div></div><p style="margin-top:8px;color:#86efac">👁️ Lihat hafalan</p></button>`}).join("");closeParentMaterialDetail()}
-window.backToParentList=function(){document.getElementById("parentDetail").classList.add("hidden");document.getElementById("parentPortal").classList.remove("hidden");renderParentStudents()};
-window.closeParentMaterialDetail=function(){document.getElementById("parentMaterialDetail").classList.add("hidden");document.getElementById("parentMaterialList").innerHTML=""};
-window.openParentMaterialDetail=function(key){if(!parentSiswaAktif)return;const box=document.getElementById("parentMaterialDetail"),title=document.getElementById("parentMaterialTitle"),summary=document.getElementById("parentMaterialSummary"),list=document.getElementById("parentMaterialList");box.classList.remove("hidden");if(key!=="nonJuz30"){const items=materi[key]||[];const data=parentSiswaAktif.hafalan?.[key]||{};const done=items.filter((_,i)=>data[i]===true).length;title.textContent=(namaKategori[key]||key)+" — Detail";summary.textContent=`${done}/${items.length} materi sudah dihafal`;list.innerHTML=items.map((item,i)=>{const ok=data[i]===true;return`<div class="parent-material-item ${ok?"done":""}"><span>${ok?"✅":"⬜"}</span><span>${escapeHTML(item)}</span><span class="parent-status ${ok?"done":"todo"}">${ok?"SUDAH HAFAL":"BELUM"}</span></div>`}).join("");}else{const data=parentSiswaAktif.hafalan?.nonJuz30||{};title.textContent="📖 NON JUZ 30 — Detail";let totalDone=0;list.innerHTML=nonJuz30Surah.map(s=>{let done=0;for(let a=1;a<=s.ayat;a++)if(data[s.no]?.[a]===true)done++;totalDone+=done;const percent=s.ayat?Math.round(done/s.ayat*100):0;const chips=Array.from({length:s.ayat},(_,i)=>{const a=i+1;const ok=data[s.no]?.[a]===true;return`<span class="parent-ayat-chip ${ok?"":"todo"}">${ok?"✓":"○"} ${a}</span>`}).join("");return`<div class="parent-material-item"><div class="parent-surah-row" style="width:100%"><span class="parent-surah-no">${s.no}</span><div class="parent-surah-info"><div class="parent-surah-name">${escapeHTML(s.name)}</div><div class="parent-surah-bar"><div class="parent-surah-fill" style="width:${percent}%"></div></div></div><span class="parent-ayat-progress">${done}/${s.ayat}</span></div><div class="parent-ayat-detail">${chips}</div></div>`}).join("");summary.textContent=`${totalDone}/${totalNonJuz30Ayat()} ayat sudah dihafal`;}}
+let parentMaterialKey=null;
+let parentNonJuzSurahNo=null;
+
+window.openAdminLogin=function(){
+  document.getElementById("entryChoice").classList.add("hidden");
+  document.getElementById("adminLoginBox").classList.remove("hidden");
+};
+
+window.backToEntryChoice=function(){
+  ["parentPortal","parentDetail"].forEach(id=>document.getElementById(id)?.classList.add("hidden"));
+  document.getElementById("app").style.display="none";
+  document.getElementById("adminLoginBox").classList.add("hidden");
+  document.getElementById("entryChoice").classList.remove("hidden");
+  document.getElementById("loginPage").style.display="flex";
+  parentSiswaAktif=null;
+  parentMaterialKey=null;
+  parentNonJuzSurahNo=null;
+};
+
+window.openParentPortal=async function(){
+  document.getElementById("loginPage").style.display="none";
+  document.getElementById("parentPortal").classList.remove("hidden");
+  document.getElementById("parentDetail").classList.add("hidden");
+  document.getElementById("parentSearch").value="";
+  const list=document.getElementById("parentStudentList");
+  list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center">⏳ Memuat data santri...</div>';
+  try{
+    const snapshot=await getDocs(siswaRef);
+    siswa=snapshot.docs.map(item=>({id:item.id,...item.data()}));
+    renderParentStudents();
+  }catch(error){
+    console.error(error);
+    list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center;color:#f87171">❌ Gagal mengambil data. Periksa koneksi internet.</div>';
+  }
+};
+
+function parentProgressText(student,key){
+  if(key==="nonJuz30"){
+    const data=student.hafalan?.nonJuz30||{};
+    const total=totalNonJuz30Ayat();
+    let done=0;
+    nonJuz30Surah.forEach(s=>{for(let a=1;a<=s.ayat;a++)if(data[s.no]?.[a]===true)done++;});
+    return {done,total,percent:total?Math.round(done/total*100):0};
+  }
+  const items=materi[key]||[];
+  const data=student.hafalan?.[key]||{};
+  const done=items.filter((_,i)=>data[i]===true).length;
+  return {done,total:items.length,percent:items.length?Math.round(done/items.length*100):0};
+}
+
+window.renderParentStudents=function(){
+  const search=(document.getElementById("parentSearch")?.value||"").toLowerCase();
+  const data=siswa.filter(x=>(x.nama||"").toLowerCase().includes(search));
+  const list=document.getElementById("parentStudentList");
+  if(!data.length){
+    list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center"><div style="font-size:38px">👤</div><p class="muted">Nama anak tidak ditemukan.</p></div>';
+    return;
+  }
+  list.innerHTML=data.map(student=>{
+    const p=getProgress(student);
+    return `<button type="button" class="parent-student" onclick="openParentStudent('${student.id}')">
+      <div class="parent-student-name">👤 ${escapeHTML(student.nama||"Tanpa Nama")}</div>
+      <div class="parent-student-meta">Kelas ${escapeHTML(student.kelas||"-")} • ${p.selesai}/${p.total} hafalan</div>
+      <div class="parent-mini-progress"><div class="parent-mini-fill" style="width:${p.persen}%"></div></div>
+      <div class="parent-percent">${p.persen}% selesai</div>
+    </button>`;
+  }).join("");
+};
+
+window.openParentStudent=function(id){
+  const student=siswa.find(x=>x.id===id);
+  if(!student)return;
+  parentSiswaAktif=student;
+  parentMaterialKey=null;
+  parentNonJuzSurahNo=null;
+  document.getElementById("parentPortal").classList.add("hidden");
+  document.getElementById("parentDetail").classList.remove("hidden");
+  renderParentDetail();
+};
+
+function renderParentDetail(){
+  if(!parentSiswaAktif)return;
+  const p=getProgress(parentSiswaAktif);
+  document.getElementById("parentDetailName").textContent="👤 "+(parentSiswaAktif.nama||"Tanpa Nama");
+  document.getElementById("parentDetailClass").textContent="Kelas "+(parentSiswaAktif.kelas||"-");
+  document.getElementById("parentDetailProgress").style.width=p.persen+"%";
+  document.getElementById("parentDetailProgressText").textContent=`${p.selesai}/${p.total} hafalan selesai • ${p.persen}%`;
+  const keys=["juz30","aqidah","dzikir","awamil","amsilati","tasrif","nonJuz30"];
+  document.getElementById("parentCategoryGrid").innerHTML=keys.map(key=>{
+    const q=parentProgressText(parentSiswaAktif,key);
+    const title=key==="nonJuz30"?"📖 NON JUZ 30":namaKategori[key];
+    return `<button type="button" class="parent-category" onclick="openParentMaterialDetail('${key}')">
+      <h3>${escapeHTML(title)}</h3>
+      <p>${q.done}/${q.total} selesai • ${q.percent}%</p>
+      <div class="parent-mini-progress"><div class="parent-mini-fill" style="width:${q.percent}%"></div></div>
+      <p style="margin-top:8px;color:#86efac">👉 Klik untuk melihat detail</p>
+    </button>`;
+  }).join("");
+  closeParentMaterialDetail();
+}
+
+window.backToParentList=function(){
+  document.getElementById("parentDetail").classList.add("hidden");
+  document.getElementById("parentPortal").classList.remove("hidden");
+  parentMaterialKey=null;
+  parentNonJuzSurahNo=null;
+  renderParentStudents();
+};
+
+window.closeParentMaterialDetail=function(){
+  document.getElementById("parentMaterialDetail").classList.add("hidden");
+  document.getElementById("parentMaterialList").innerHTML="";
+  parentMaterialKey=null;
+  parentNonJuzSurahNo=null;
+};
+
+window.openParentMaterialDetail=function(key){
+  if(!parentSiswaAktif)return;
+  parentMaterialKey=key;
+  parentNonJuzSurahNo=null;
+  const box=document.getElementById("parentMaterialDetail");
+  box.classList.remove("hidden");
+  if(key==="nonJuz30"){
+    renderParentNonJuzSurahList();
+  }else{
+    renderParentNormalMaterial(key);
+  }
+  box.scrollIntoView({behavior:"smooth",block:"start"});
+};
+
+function renderParentNormalMaterial(key){
+  const title=document.getElementById("parentMaterialTitle");
+  const summary=document.getElementById("parentMaterialSummary");
+  const list=document.getElementById("parentMaterialList");
+  const items=materi[key]||[];
+  const data=parentSiswaAktif.hafalan?.[key]||{};
+  const done=items.filter((_,i)=>data[i]===true).length;
+  title.textContent=(namaKategori[key]||key)+" — Detail";
+  summary.textContent=`${done}/${items.length} materi sudah dihafal`;
+  list.innerHTML=items.map((item,i)=>{
+    const ok=data[i]===true;
+    return `<div class="parent-material-item ${ok?"done":""}">
+      <span style="font-size:20px">${ok?"✅":"⬜"}</span>
+      <span style="flex:1">${escapeHTML(item)}</span>
+      <span class="parent-status ${ok?"done":"todo"}">${ok?"SUDAH HAFAL":"BELUM"}</span>
+    </div>`;
+  }).join("");
+}
+
+function renderParentNonJuzSurahList(){
+  const title=document.getElementById("parentMaterialTitle");
+  const summary=document.getElementById("parentMaterialSummary");
+  const list=document.getElementById("parentMaterialList");
+  const data=parentSiswaAktif.hafalan?.nonJuz30||{};
+  let totalDone=0;
+  const total=totalNonJuz30Ayat();
+  list.innerHTML=nonJuz30Surah.map(s=>{
+    let done=0;
+    for(let a=1;a<=s.ayat;a++)if(data[s.no]?.[a]===true)done++;
+    totalDone+=done;
+    const percent=s.ayat?Math.round(done/s.ayat*100):0;
+    return `<button type="button" class="parent-material-item parent-click-item" style="width:100%;text-align:left" onclick="openParentNonJuzSurah(${s.no})">
+      <span class="parent-surah-no">${s.no}</span>
+      <div class="parent-surah-info">
+        <div class="parent-surah-name">${escapeHTML(s.name)}</div>
+        <div class="parent-surah-bar"><div class="parent-surah-fill" style="width:${percent}%"></div></div>
+      </div>
+      <span class="parent-ayat-progress">${done}/${s.ayat} ayat</span>
+      <span style="color:#86efac">›</span>
+    </button>`;
+  }).join("");
+  title.textContent="📖 NON JUZ 30 — Daftar Surat";
+  summary.textContent=`${totalDone}/${total} ayat sudah dihafal • Klik surat untuk melihat ayat`;
+}
+
+window.openParentNonJuzSurah=function(no){
+  const s=nonJuz30Surah.find(x=>x.no===no);
+  if(!s||!parentSiswaAktif)return;
+  parentNonJuzSurahNo=no;
+  const data=parentSiswaAktif.hafalan?.nonJuz30?.[no]||{};
+  let done=0;
+  for(let a=1;a<=s.ayat;a++)if(data[a]===true)done++;
+  document.getElementById("parentMaterialTitle").textContent=`📖 ${s.name}`;
+  document.getElementById("parentMaterialSummary").textContent=`${done}/${s.ayat} ayat sudah dihafal`;
+  document.getElementById("parentMaterialList").innerHTML=`
+    <button type="button" class="btn secondary parent-detail-back" onclick="renderParentNonJuzSurahList()">← Kembali ke daftar surat</button>
+    <div class="parent-material-list">${Array.from({length:s.ayat},(_,i)=>{
+      const a=i+1,ok=data[a]===true;
+      return `<div class="parent-material-item ${ok?"done":""}">
+        <span style="font-size:19px">${ok?"✅":"⬜"}</span>
+        <span style="flex:1;font-weight:bold">Ayat ${a}</span>
+        <span class="parent-status ${ok?"done":"todo"}">${ok?"SUDAH HAFAL":"BELUM"}</span>
+      </div>`;
+    }).join("")}</div>`;
+  document.getElementById("parentMaterialDetail").scrollIntoView({behavior:"smooth",block:"start"});
+};
 
 /* ==================================================
 LOGIN
