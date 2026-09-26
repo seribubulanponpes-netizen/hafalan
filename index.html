@@ -679,7 +679,7 @@ MOBILE
 .surah-item:hover{border-color:#38bdf8}
 .surah-number{min-width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#1d4ed8;font-weight:bold}
 .surah-name{flex:1;font-weight:bold}.surah-count{color:#94a3b8;font-size:12px}
-</style>
+.parent-entry{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.parent-btn{background:#14532d;border:1px solid #166534;color:white;padding:14px;border-radius:12px;font-weight:bold}.admin-entry{background:#1e293b;border:1px solid #334155;color:white;padding:14px;border-radius:12px;font-weight:bold}.parent-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}.parent-student{background:#12243a;border:1px solid #29435e;border-radius:16px;padding:16px;text-align:left;color:white;width:100%}.parent-student:hover{border-color:#22c55e}.parent-student-name{font-size:17px;font-weight:bold;margin-bottom:6px}.parent-student-meta{color:#94a3b8;font-size:13px;margin-bottom:12px}.parent-mini-progress{height:8px;background:#0b1727;border-radius:99px;overflow:hidden}.parent-mini-fill{height:100%;background:#22c55e;border-radius:99px}.parent-percent{margin-top:8px;font-size:13px;color:#bbf7d0;font-weight:bold}.parent-category-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}.parent-category{background:#12243a;border:1px solid #29435e;border-radius:15px;padding:15px}.parent-category h3{font-size:15px;margin-bottom:7px}.parent-category p{color:#94a3b8;font-size:13px;line-height:1.5}.parent-category .parent-mini-progress{margin-top:10px}.parent-note{background:#082f49;border:1px solid #075985;color:#bae6fd;padding:12px;border-radius:12px;font-size:12px;line-height:1.5;margin-top:15px}@media(max-width:700px){.parent-entry,.parent-list,.parent-category-grid{grid-template-columns:1fr}}</style>
 </head>
 
 
@@ -690,99 +690,12 @@ MOBILE
 LOGIN
 ================================================== -->
 
-<section id="loginPage">
+<section id="loginPage"><div class="login-box"><div class="login-icon">📚</div><h1>Hafalan Santri</h1><p class="login-subtitle">Silakan pilih akses yang sesuai.</p><div id="entryChoice"><div class="parent-entry"><button type="button" class="parent-btn" onclick="openParentPortal()">👨‍👩‍👧 Portal Orang Tua</button><button type="button" class="admin-entry" onclick="openAdminLogin()">🔐 Login Admin</button></div></div><div id="adminLoginBox" class="hidden"><div class="login-icon" style="font-size:42px;margin-top:10px">🔐</div><h2 style="text-align:center;margin-bottom:8px">Login Admin</h2><form id="loginForm"><div class="form-group"><label>Email Admin</label><input id="loginEmail" type="text" placeholder="Masukkan email" required></div><div class="form-group"><label>Password</label><input id="loginPassword" type="password" placeholder="Masukkan password" required></div><div id="loginError" class="login-error"></div><button type="submit" class="btn primary full">🔓 Masuk</button></form><div class="default-account"><b>💡 Akun awal</b><br><br>Email: <code>adminponpes@hafalan.com</code><br>Password: <code>ponpesseribubulan33</code><br><br><i>Password dapat diubah di bagian kode HTML.</i></div><button type="button" class="btn secondary full" style="margin-top:10px" onclick="backToEntryChoice()">← Kembali</button></div></div></section>
 
-<div class="login-box">
-
-<div class="login-icon">
-🔐
-</div>
-
-<h1>
-Login Admin
-</h1>
-
-<p class="login-subtitle">
-Hafalan Santri
-</p>
-
-
-<form id="loginForm">
-
-<div class="form-group">
-
-<label>
-Email Admin
-</label>
-
-<input
-id="loginEmail"
-type="text"
-placeholder="Masukkan email"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Password
-</label>
-
-<input
-id="loginPassword"
-type="password"
-placeholder="Masukkan password"
-required>
-
-</div>
-
-
-<div
-id="loginError"
-class="login-error">
-</div>
-
-
-<button
-type="submit"
-class="btn primary full">
-
-🔓 Masuk
-
-</button>
-
-</form>
-
-
-<div class="default-account">
-
-<b>💡 Akun awal</b>
-
-<br><br>
-
-Email:
-<code>admin@hafalan.com</code>
-
-<br>
-
-Password:
-<code>123456</code>
-
-<br><br>
-
-<i>
-Password dapat diubah di bagian kode HTML.
-</i>
-
-</div>
-
-</div>
-
-</section>
-
-
+<!-- ==================================================
+PORTAL ORANG TUA
+================================================== -->
+<section id="parentPortal" class="hidden"><div class="container"><div class="topbar"><div class="topbar-email">👨‍👩‍👧 Portal Orang Tua</div><button class="btn secondary" onclick="backToEntryChoice()">← Kembali</button></div><div class="header"><h1>👨‍👩‍👧 Monitoring Hafalan</h1><p>Pilih nama anak untuk melihat perkembangan hafalannya.</p></div><div class="card"><input id="parentSearch" class="search" placeholder="🔎 Cari nama anak..." oninput="renderParentStudents()"><div id="parentStudentList" class="parent-list"></div><div class="parent-note">ℹ️ Portal ini hanya untuk melihat perkembangan hafalan. Orang tua tidak dapat mengubah atau mencentang data hafalan dari halaman ini.</div></div></div></section><section id="parentDetail" class="hidden"><div class="container"><button class="btn secondary" onclick="backToParentList()">← Kembali ke Daftar Anak</button><div class="card" style="margin-top:15px"><h2 id="parentDetailName">Nama</h2><p id="parentDetailClass" class="muted">Kelas</p><div class="progress-bg" style="margin-top:14px"><div id="parentDetailProgress" class="progress-bar" style="width:0%"></div></div><div id="parentDetailProgressText" class="progress-text"></div></div><div class="card"><h2>📚 Perkembangan Hafalan</h2><div id="parentCategoryGrid" class="parent-category-grid"></div></div></div></section>
 
 <!-- ==================================================
 APPLICATION
@@ -1770,7 +1683,20 @@ let editId=null;
 
 let statGender="putra";
 let suratAktif=null;
+let parentSiswaAktif=null;
 
+
+/* ==================================================
+PORTAL ORANG TUA
+================================================== */
+window.openAdminLogin=function(){document.getElementById("entryChoice").classList.add("hidden");document.getElementById("adminLoginBox").classList.remove("hidden")};
+window.backToEntryChoice=function(){document.getElementById("parentPortal").classList.add("hidden");document.getElementById("parentDetail").classList.add("hidden");document.getElementById("app").style.display="none";document.getElementById("entryChoice").classList.remove("hidden");document.getElementById("adminLoginBox").classList.add("hidden");document.getElementById("loginPage").style.display="flex"};
+window.openParentPortal=async function(){document.getElementById("loginPage").style.display="none";document.getElementById("parentPortal").classList.remove("hidden");document.getElementById("parentDetail").classList.add("hidden");document.getElementById("parentSearch").value="";const list=document.getElementById("parentStudentList");list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center">⏳ Memuat data santri...</div>';try{const snapshot=await getDocs(siswaRef);siswa=snapshot.docs.map(item=>({id:item.id,...item.data()}));renderParentStudents()}catch(error){console.error(error);list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center;color:#f87171">❌ Gagal mengambil data. Periksa koneksi internet.</div>'}};
+function parentProgressText(student,key){if(key==="nonJuz30"){const data=student.hafalan?.nonJuz30||{};let total=totalNonJuz30Ayat(),done=0;nonJuz30Surah.forEach(s=>{for(let a=1;a<=s.ayat;a++)if(data[s.no]?.[a]===true)done++});return{done,total,percent:total?Math.round(done/total*100):0}}const total=materi[key]?.length||0,data=student.hafalan?.[key]||{};let done=0;for(let i=0;i<total;i++)if(data[i]===true)done++;return{done,total,percent:total?Math.round(done/total*100):0}}
+window.renderParentStudents=function(){const search=(document.getElementById("parentSearch")?.value||"").toLowerCase();const data=siswa.filter(x=>(x.nama||"").toLowerCase().includes(search));const list=document.getElementById("parentStudentList");if(!data.length){list.innerHTML='<div class="card" style="grid-column:1/-1;text-align:center"><div style="font-size:38px">👤</div><p class="muted">Nama anak tidak ditemukan.</p></div>';return}list.innerHTML=data.map(student=>{const p=getProgress(student);return`<button class="parent-student" onclick="openParentStudent('${student.id}')"><div class="parent-student-name">👤 ${escapeHTML(student.nama||"Tanpa Nama")}</div><div class="parent-student-meta">Kelas ${escapeHTML(student.kelas||"-")} • ${p.selesai}/${p.total} hafalan</div><div class="parent-mini-progress"><div class="parent-mini-fill" style="width:${p.persen}%"></div></div><div class="parent-percent">${p.persen}% selesai</div></button>`}).join("")};
+window.openParentStudent=function(id){const student=siswa.find(x=>x.id===id);if(!student)return;parentSiswaAktif=student;document.getElementById("parentPortal").classList.add("hidden");document.getElementById("parentDetail").classList.remove("hidden");renderParentDetail()};
+function renderParentDetail(){if(!parentSiswaAktif)return;const p=getProgress(parentSiswaAktif);document.getElementById("parentDetailName").textContent="👤 "+(parentSiswaAktif.nama||"Tanpa Nama");document.getElementById("parentDetailClass").textContent="Kelas "+(parentSiswaAktif.kelas||"-");document.getElementById("parentDetailProgress").style.width=p.persen+"%";document.getElementById("parentDetailProgressText").textContent=`${p.selesai}/${p.total} hafalan selesai • ${p.persen}%`;const keys=["juz30","aqidah","dzikir","awamil","amsilati","tasrif","nonJuz30"];document.getElementById("parentCategoryGrid").innerHTML=keys.map(key=>{const q=parentProgressText(parentSiswaAktif,key);const title=key==="nonJuz30"?"📖 NON JUZ 30":namaKategori[key];return`<div class="parent-category"><h3>${escapeHTML(title)}</h3><p>${q.done}/${q.total} selesai • ${q.percent}%</p><div class="parent-mini-progress"><div class="parent-mini-fill" style="width:${q.percent}%"></div></div></div>`}).join("")}
+window.backToParentList=function(){document.getElementById("parentDetail").classList.add("hidden");document.getElementById("parentPortal").classList.remove("hidden");renderParentStudents()};
 
 /* ==================================================
 LOGIN
@@ -1863,23 +1789,7 @@ error.style.display="block";
 LOGOUT
 ================================================== */
 
-window.logout=function(){
-
-document
-.getElementById("app")
-.style.display="none";
-
-
-document
-.getElementById("loginPage")
-.style.display="flex";
-
-
-document
-.getElementById("loginPassword")
-.value="";
-
-};
+window.logout=function(){document.getElementById("app").style.display="none";document.getElementById("parentPortal").classList.add("hidden");document.getElementById("parentDetail").classList.add("hidden");document.getElementById("loginPage").style.display="flex";document.getElementById("entryChoice").classList.remove("hidden");document.getElementById("adminLoginBox").classList.add("hidden");document.getElementById("loginPassword").value=""};
 
 
 /* ==================================================
